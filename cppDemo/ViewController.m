@@ -58,7 +58,7 @@
 
 - (AudioQueuePlayer *)player {
     if (!_player) {
-        _player = [[AudioQueuePlayer alloc] initWithSampleRate:16000.0 andChannelsPerFrame:1 andBitsPerChannel:16];
+        _player = [[AudioQueuePlayer alloc] init];
     }
     return _player;
 }

@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface AudioQueuePlayer : NSObject
-
-- (instancetype)initWithSampleRate:(Float64)sampleRate andChannelsPerFrame:(UInt32)channels andBitsPerChannel:(UInt32)bits;
 - (void)pause;
 - (void)playWithData:(Byte *)buffer andSize:(UInt32)length;
 

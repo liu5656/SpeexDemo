@@ -10,17 +10,21 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
-typedef struct AQRecorderState {
+#define MaxBufferSize 8192
+
+#define kAQAudioSampleRate 16000
+#define kAQBitsPerChannel 16
+#define kAQChannelsPerFrame 1
+#define kAQFramesPerPacket 1
+
+@interface AudioQueueRecorder()
+{
     AudioStreamBasicDescription mDataFormat;
     AudioQueueRef               mQueue;
     AudioQueueBufferRef         mBuffers[3];
-} AQRecorderState;
-
-#define MaxBufferSize 8192
-
-@interface AudioQueueRecorder()
+    AudioFileID                 mAudioFile;
+}
 @property (nonatomic, assign) BOOL isRecording;
-@property (nonatomic,assign) AQRecorderState aqState;
 @property (nonatomic, strong) NSMutableData *audioData;
 @end
 
@@ -28,30 +32,33 @@ typedef struct AQRecorderState {
 
 - (instancetype)initWithSampleRate:(Float64)sampleRate andChannelsPerFrame:(UInt32)channels andBitsPerChannel:(UInt32)bits {
     if (self = [super init]) {
-        _aqState.mDataFormat.mFormatID = kAudioFormatLinearPCM;
-        _aqState.mDataFormat.mSampleRate = sampleRate;
-        _aqState.mDataFormat.mChannelsPerFrame = channels;
-        _aqState.mDataFormat.mBitsPerChannel = bits;
-//        _aqState.mDataFormat.mBytesPerFrame = _aqState.mDataFormat.mChannelsPerFrame * (_aqState.mDataFormat.mBitsPerChannel / 8);
-        
-        _aqState.mDataFormat.mFramesPerPacket = 1;
-//        _aqState.mDataFormat.mBytesPerPacket = _aqState.mDataFormat.mBytesPerFrame * _aqState.mDataFormat.mFramesPerPacket;
-        _aqState.mDataFormat.mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
+        [self setRecordFormatWithFormatID:kAudioFormatLinearPCM];
         [self createAudioInput];
     }
     return self;
 }
 
+- (void)setRecordFormatWithFormatID:(UInt32)formatID {
+    memset(&mDataFormat, 0, sizeof(mDataFormat));
+    mDataFormat.mSampleRate = kAQAudioSampleRate; // 设置采样率
+    mDataFormat.mChannelsPerFrame = kAQChannelsPerFrame;
+    mDataFormat.mFormatID = formatID;
+    if (formatID == kAudioFormatLinearPCM) {
+        mDataFormat.mFormatFlags     = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
+        mDataFormat.mBitsPerChannel  = kAQBitsPerChannel;
+        mDataFormat.mBytesPerFrame   = (mDataFormat.mBitsPerChannel / 8) * mDataFormat.mChannelsPerFrame;
+        mDataFormat.mFramesPerPacket = kAQFramesPerPacket;
+        mDataFormat.mBytesPerPacket  = mDataFormat.mBytesPerFrame;
+    }
+}
 
 void AQInputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer, const AudioTimeStamp *inStartTime, UInt32 inNumberPacketDescriptions, const AudioStreamPacketDescription * __nullable inPacketDescs){
     AudioQueueRecorder *recorder = (__bridge AudioQueueRecorder*)inUserData;
     if (inNumberPacketDescriptions > 0) {
         NSLog(@"inbuffer.size:%d", inBuffer->mAudioDataByteSize);
-//        if (recorder.audioData.length < MaxBufferSize) {
-//            
-//        }
         [recorder.player playWithData:inBuffer->mAudioData andSize:inBuffer->mAudioDataByteSize];
     }
+    
     if (recorder.isRecording) {
         AudioQueueEnqueueBuffer(inAQ, inBuffer, 0, NULL);
     }
@@ -63,7 +70,7 @@ void AQInputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueu
     [session setCategory:AVAudioSessionCategoryMultiRoute error:&nsError];
     [session setActive:YES error:&nsError];
     
-    OSStatus status = AudioQueueNewInput(&_aqState.mDataFormat, AQInputCallback, (__bridge void *)self, NULL, kCFRunLoopCommonModes, 0, &_aqState.mQueue);
+    OSStatus status = AudioQueueNewInput(&mDataFormat, AQInputCallback, (__bridge void *)self, NULL, kCFRunLoopCommonModes, 0, &mQueue);
     if (status != noErr) {
         NSLog(@"initialize audio queue failed:%d", status);
         return;
@@ -73,15 +80,35 @@ void AQInputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueu
 //        NSLog(@"observer property failed");
 //        return;
 //    }
+    UInt32 bufferSize = 0;
+    DeriveBufferSize(mQueue, &mDataFormat, 0.5, &bufferSize);
+    
     for (int i = 0; i < 3; ++i) {
-        AudioQueueAllocateBuffer(_aqState.mQueue, MaxBufferSize, &_aqState.mBuffers[i]);
-        AudioQueueEnqueueBuffer(_aqState.mQueue, _aqState.mBuffers[i], 0, NULL);
+        AudioQueueAllocateBuffer(mQueue, bufferSize, &mBuffers[i]);
+        AudioQueueEnqueueBuffer(mQueue, mBuffers[i], 0, NULL);
     }
+    
+//    CFURLRef audioFileURL = CFURLCreateWithFileSystemPath(kCFAllocatorDefault, CFSTR("output.caf"), kCFURLPOSIXPathStyle, false);
+//    AudioFileID mAudioFile;
+//    AudioFileCreateWithURL(audioFileURL, kAudioFileAIFFType, &_aqState.mDataFormat, kAudioFileFlags_EraseFile, &_aqState.mAudioFile);
+}
+
+void DeriveBufferSize (AudioQueueRef audioQueue,AudioStreamBasicDescription *ASBDescription, Float64 seconds,UInt32                       *outBufferSize) {
+    static const int maxBufferSize = 0x50000;
+    
+    int maxPacketSize = (*ASBDescription).mBytesPerPacket;
+    if (maxPacketSize == 0) {
+        UInt32 maxVBRPacketSize = sizeof(maxPacketSize);
+        AudioQueueGetProperty(audioQueue,kAudioQueueProperty_MaximumOutputPacketSize,&maxPacketSize,&maxVBRPacketSize);
+    }
+    
+    Float64 numBytesForTime = (*ASBDescription).mSampleRate * maxPacketSize * seconds;
+    *outBufferSize = numBytesForTime < maxBufferSize ? numBytesForTime : maxBufferSize;
 }
 
 
 - (void)pause {
-    OSStatus status = AudioQueuePause(_aqState.mQueue);
+    OSStatus status = AudioQueuePause(mQueue);
     if (status == noErr) {
         _isRecording = NO;
     }
@@ -91,9 +118,9 @@ void AQInputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueu
 }
 
 - (void)record {
-    if (_aqState.mQueue) {
+    if (mQueue) {
         _isRecording = YES;
-        AudioQueueStart(_aqState.mQueue, NULL);
+        AudioQueueStart(mQueue, NULL);
     }
 }
 

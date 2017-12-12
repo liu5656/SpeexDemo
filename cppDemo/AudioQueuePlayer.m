@@ -12,70 +12,63 @@
 
 #define MaxBufferSize 8192
 
-static const int kNumberBuffers = 3;                              // 1
-typedef struct AQPlayerState {
-    AudioStreamBasicDescription   mDataFormat;                    // 2
-    AudioQueueRef                 mQueue;                         // 3
-    AudioQueueBufferRef           mBuffers[kNumberBuffers];       // 4
-    AudioFileID                   mAudioFile;                     // 5
-    UInt32                        bufferByteSize;                 // 6
-    SInt64                        mCurrentPacket;                 // 7
-    UInt32                        mNumPacketsToRead;              // 8
-    AudioStreamPacketDescription  *mPacketDescs;                  // 9
-    bool                          mIsRunning;                     // 10
-} AQPlayerState;
+#define kAQAudioSampleRate 16000
+#define kAQBitsPerChannel 16
+#define kAQChannelsPerFrame 1
+#define kAQFramesPerPacket 1
+
+static const int kNumberBuffers = 3;
 
 @interface AudioQueuePlayer(){
-    int mBuffersUsed[3];
+    AudioStreamBasicDescription   mDataFormat;
+    AudioQueueRef                 mQueue;
+    AudioQueueBufferRef           mBuffers[kNumberBuffers];
 }
-
-
-@property (nonatomic, assign) AQPlayerState aqState;
-@property (nonatomic, strong) NSLock *sysnLock;
-@property (nonatomic, strong) NSArray *bufferUsed;              //判断音频缓存是否在使用
-
 @end
 
 @implementation AudioQueuePlayer
 
-- (instancetype)initWithSampleRate:(Float64)sampleRate andChannelsPerFrame:(UInt32)channels andBitsPerChannel:(UInt32)bits {
+- (instancetype)init {
     if (self = [super init]) {
-        _aqState.mDataFormat.mFormatID = kAudioFormatLinearPCM;
-        _aqState.mDataFormat.mSampleRate = sampleRate;
-        _aqState.mDataFormat.mChannelsPerFrame = channels;
-        _aqState.mDataFormat.mBitsPerChannel = bits;
-        _aqState.mDataFormat.mBytesPerFrame = _aqState.mDataFormat.mChannelsPerFrame * sizeof (SInt16);
-        _aqState.mDataFormat.mBytesPerPacket = _aqState.mDataFormat.mBytesPerFrame;
-        _aqState.mDataFormat.mFramesPerPacket = 1;
-        _aqState.mDataFormat.mFormatFlags = kLinearPCMFormatFlagIsBigEndian | kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
-        _sysnLock = [[NSLock alloc] init];
+        [self setPlayFormatWithFormatID:kAudioFormatLinearPCM];
         [self createAudioOutput];
-        
-        
     }
     return self;
 }
 
 void AQOutputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQueueBufferRef inBuffer) {
-    
-    AudioQueuePlayer *player = (__bridge AudioQueuePlayer *)inUserData;
-    [player resetBufferState:inBuffer andAudioQueue:inAQ];
+    //    AudioQueuePlayer *player = (__bridge AudioQueuePlayer *)inUserData;
+    //    [player resetBufferState:inBuffer andAudioQueue:inAQ];
 }
 
 - (void)resetBufferState:(AudioQueueBufferRef)inBuffer andAudioQueue:(AudioQueueRef)inAQ {
-    for (int i = 0; i < kNumberBuffers; i++) {
-        if(inBuffer == self.aqState.mBuffers[i]){
-            mBuffersUsed[i] = 0;
-            NSLog(@"player call back----%d----%@", mBuffersUsed[i], [NSThread currentThread]);
-            break;
-        }
+    //    for (int i = 0; i < kNumberBuffers; i++) {
+    //        if(inBuffer == mBuffers[i]){
+    //            mBuffersUsed[i] = 0;
+    ////            NSLog(@"player call back----%d----%@", mBuffersUsed[i], [NSThread currentThread]);
+    //            break;
+    //        }
+    //    }
+}
+
+- (void)setPlayFormatWithFormatID:(UInt32)formatID {
+    memset(&mDataFormat, 0, sizeof(mDataFormat));
+    mDataFormat.mSampleRate = kAQAudioSampleRate; // 设置采样率
+    mDataFormat.mChannelsPerFrame = kAQChannelsPerFrame;
+    mDataFormat.mFormatID = formatID;
+    if (formatID == kAudioFormatLinearPCM) {
+        mDataFormat.mFormatFlags     = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
+        mDataFormat.mBitsPerChannel  = kAQBitsPerChannel;
+        mDataFormat.mBytesPerFrame   = (mDataFormat.mBitsPerChannel / 8) * mDataFormat.mChannelsPerFrame;
+        mDataFormat.mFramesPerPacket = kAQFramesPerPacket;
+        mDataFormat.mBytesPerPacket  = mDataFormat.mBytesPerFrame;
     }
 }
 
-- (void)createAudioOutput {
+- (void)setupSession {
     NSError *error = nil;
     AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryMultiRoute error:&error];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
     if (error) {
         NSLog(@"setup audio category failed:%@", error);
         return;
@@ -85,8 +78,23 @@ void AQOutputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQue
         NSLog(@"turn on sesstion failed:%@", error);
         return;
     }
+    for (NSString *input in session.availableModes) {
+        NSLog(@"input:%@", input);
+    }
     
-    OSStatus status = AudioQueueNewOutput(&_aqState.mDataFormat, AQOutputCallback, (__bridge void*)self, nil, 0, 0, &_aqState.mQueue);
+    //    [session setPreferredInput:<#(nullable AVAudioSessionPortDescription *)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>]
+    
+    // 临时改变当前音频文件播放方式
+    //    [session overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:&error];
+    //    if (error) {
+    //        NSLog(@"temporarily changes the current audio route failed:%@", error);
+    //    }
+    
+}
+
+- (void)createAudioOutput {
+    [self setupSession];
+    OSStatus status = AudioQueueNewOutput(&mDataFormat, AQOutputCallback, (__bridge void*)self, nil, 0, 0, &mQueue);
     if (status != noErr) {
         NSLog(@"inital audio queue output failed:%d", status);
         return;
@@ -97,13 +105,13 @@ void AQOutputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQue
     //        return;
     //    }
     for (int i = 0; i < kNumberBuffers; i++) {
-        AudioQueueAllocateBuffer(_aqState.mQueue, MaxBufferSize, &_aqState.mBuffers[i]);
-        AudioQueueEnqueueBuffer(_aqState.mQueue, _aqState.mBuffers[i], 0, NULL);
+        AudioQueueAllocateBuffer(mQueue, MaxBufferSize, &mBuffers[i]);
+        AudioQueueEnqueueBuffer(mQueue, mBuffers[i], 0, NULL);
     }
     
-//    AudioQueueSetParameter(_aqState.mQueue, kAudioQueueParam_Volume, 1.0);
+    AudioQueueSetParameter(mQueue, kAudioQueueParam_Volume, 1.0);
     
-    status = AudioQueueStart(_aqState.mQueue, NULL);
+    status = AudioQueueStart(mQueue, NULL);
     if (status != noErr) {
         NSLog(@"audio queue start error");
         return;
@@ -114,27 +122,28 @@ void AQOutputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQue
     
 }
 
+static int i = 0;
 - (void)playWithData:(Byte *)buffer andSize:(UInt32)length {
-    [_sysnLock lock];
     if (length > 0) {
-        int i = 0;
-        while (true) {
-            NSLog(@"play-----%@", [NSThread currentThread]);
-            if (!mBuffersUsed[i]) {
-                mBuffersUsed[i] = 1;
-                break;
-            }
-            i++;
-            if (i >= kNumberBuffers) i = 0;
-        }
-
-        memcpy(_aqState.mBuffers[i] -> mAudioData, buffer, length);
-        _aqState.mBuffers[i]->mAudioDataByteSize = length;
-        OSStatus status = AudioQueueEnqueueBuffer(_aqState.mQueue, _aqState.mBuffers[i], 0, NULL);
-        NSLog(@"status:%d--%d", status, length);
-        
+        mBuffers[i]->mAudioDataByteSize = length;
+        memset(mBuffers[i]->mAudioData, 0, length);
+        memcpy(mBuffers[i] -> mAudioData, buffer, length);
+        AudioQueueEnqueueBuffer(mQueue, mBuffers[i], 0, NULL);
+        i++;
+        if (3 == i) i = 0;
     }
-    [_sysnLock unlock];
 }
 
+
+
+
+
+
+
+
+
+
+
+
 @end
+
