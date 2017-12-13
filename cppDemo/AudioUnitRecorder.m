@@ -17,11 +17,12 @@
 #define kInputBus   1
 
 @interface AudioUnitRecorder(){
-    AudioComponentInstance      audioUnit;
-    AudioBufferList             *mBufferList;
+    AudioComponentInstance                          audioUnit;
+    AudioBufferList                                 *mBufferList;
+    
 }
-
-@property (nonatomic, strong) AudioQueuePlayer *player;
+@property (nonatomic, strong) NSMutableData         *audioData;
+@property (nonatomic, strong) AudioQueuePlayer      *player;
 @end
 
 
@@ -181,6 +182,9 @@ void checkStatus(OSStatus status, char error[]) {
 
 - (void)stop {
     checkStatus(AudioOutputUnitStop(audioUnit), "audio unit stop failed");
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/11"];
+    BOOL result = [_audioData writeToFile:path atomically:YES];
+    NSLog(@"save result: %d", result);
 }
 
 
@@ -193,7 +197,9 @@ static OSStatus recordingCallback(void *inRefCon,
     AudioUnitRecorder *recorder = (__bridge AudioUnitRecorder*)inRefCon;
 
     AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, recorder->mBufferList);
-    printf("+++++++inBus:%d--Frames:%d---byteSize:%d\n", inBusNumber, inNumberFrames, recorder->mBufferList->mBuffers[0].mDataByteSize);
+    
+    [recorder.audioData appendBytes:recorder->mBufferList->mBuffers[0].mData length:recorder->mBufferList->mBuffers[0].mDataByteSize];
+//    printf("+++++++inBus:%d--Frames:%d---byteSize:%d\n", inBusNumber, inNumberFrames, recorder->mBufferList->mBuffers[0].mDataByteSize);
 //    printf("+++++++%p\n", recorder->mBufferList);
     return noErr;
 }
@@ -220,6 +226,13 @@ static OSStatus playbackCallback(void *inRefCon,
         _player = [[AudioQueuePlayer alloc] init];
     }
     return _player;
+}
+
+- (NSMutableData *)audioData {
+    if (!_audioData) {
+        _audioData = [NSMutableData data];
+    }
+    return _audioData;
 }
 
 @end
