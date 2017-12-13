@@ -78,9 +78,9 @@ void AQOutputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQue
         NSLog(@"turn on sesstion failed:%@", error);
         return;
     }
-    for (NSString *input in session.availableModes) {
-        NSLog(@"input:%@", input);
-    }
+//    for (NSString *input in session.availableModes) {
+//        NSLog(@"input:%@", input);
+//    }
     
     //    [session setPreferredInput:<#(nullable AVAudioSessionPortDescription *)#> error:<#(NSError * _Nullable __autoreleasing * _Nullable)#>]
     

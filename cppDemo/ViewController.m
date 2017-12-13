@@ -10,11 +10,17 @@
 #import "AudioQueueRecorder.h"
 #import "AudioQueuePlayer.h"
 
+#import "AudioUnitRecorder.h"
+
+//#import "speex.h"
+
 
 @interface ViewController ()
 
 @property (nonatomic, strong) AudioQueueRecorder *recorder;
 @property (nonatomic, strong) AudioQueuePlayer *player;
+
+@property (nonatomic, strong) AudioUnitRecorder *recorder2;
 
 @end
 
@@ -23,30 +29,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+//    speex_encoder_init(&speex_nb_mode);
 }
 
-- (IBAction)playControl:(UIButton *)sender {
-    if ([sender.titleLabel.text isEqualToString:@"play"]) {
-        [sender setTitle:@"pause" forState:UIControlStateNormal];
-    }else{
-        [sender setTitle:@"play" forState:UIControlStateNormal];
-        _recorder.player = self.player;
-    }
-}
+// auido queue 边录边播放
 - (IBAction)recordControl:(UIButton *)sender {
     if ([sender.titleLabel.text isEqualToString:@"record"]) {
         [sender setTitle:@"stop" forState:UIControlStateNormal];
-        [_recorder pause];
+        [self.recorder record];
+        _recorder.player = self.player;
     }else{
         [sender setTitle:@"record" forState:UIControlStateNormal];
-        [self.recorder record];
+        [_recorder pause];
     }
+}
+
+// audio unit 边录边播放
+- (IBAction)AudioUnitControl:(UIButton *)sender {
+    if (!sender.selected) { // 开始
+        [self.recorder2 record];
+    }else{ // 暂停
+        [self.recorder2 stop];
+    }
+    sender.selected = !sender.selected;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self player];
 }
 
 - (AudioQueueRecorder *)recorder {
@@ -61,6 +70,13 @@
         _player = [[AudioQueuePlayer alloc] init];
     }
     return _player;
+}
+
+- (AudioUnitRecorder *)recorder2 {
+    if (!_recorder2) {
+        _recorder2 = [[AudioUnitRecorder alloc] init];
+    }
+    return _recorder2;
 }
 
 - (void)didReceiveMemoryWarning {
