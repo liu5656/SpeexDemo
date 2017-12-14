@@ -12,6 +12,7 @@
 		2A0835B31FE0B821000FD145 /* libspeex.la in Resources */ = {isa = PBXBuildFile; fileRef = 2A0835AA1FE0B821000FD145 /* libspeex.la */; };
 		2A0835B41FE0B821000FD145 /* speex.m4 in Resources */ = {isa = PBXBuildFile; fileRef = 2A0835AD1FE0B821000FD145 /* speex.m4 */; };
 		2A0835B51FE0B821000FD145 /* manual.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2A0835B01FE0B821000FD145 /* manual.pdf */; };
+		2A0835BB1FE11EC6000FD145 /* SpeexEnc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */; };
 		2A48E7EB1FDA96C400FA5E5D /* AudioQueuePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A48E7EA1FDA96C400FA5E5D /* AudioQueuePlayer.m */; };
 		2A9DC2821FD97AD10020A1F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2811FD97AD10020A1F0 /* AppDelegate.m */; };
 		2A9DC2851FD97AD20020A1F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2841FD97AD20020A1F0 /* ViewController.m */; };
@@ -57,6 +58,8 @@
 		2A0835AA1FE0B821000FD145 /* libspeex.la */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libspeex.la; sourceTree = "<group>"; };
 		2A0835AD1FE0B821000FD145 /* speex.m4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = speex.m4; sourceTree = "<group>"; };
 		2A0835B01FE0B821000FD145 /* manual.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = manual.pdf; sourceTree = "<group>"; };
+		2A0835B91FE11EC6000FD145 /* SpeexEnc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeexEnc.h; sourceTree = "<group>"; };
+		2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SpeexEnc.c; sourceTree = "<group>"; };
 		2A48E7E91FDA96C400FA5E5D /* AudioQueuePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioQueuePlayer.h; sourceTree = "<group>"; };
 		2A48E7EA1FDA96C400FA5E5D /* AudioQueuePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioQueuePlayer.m; sourceTree = "<group>"; };
 		2A9DC27D1FD97AD10020A1F0 /* cppDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cppDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +228,8 @@
 				2A48E7EA1FDA96C400FA5E5D /* AudioQueuePlayer.m */,
 				2AC18BA71FDFC1A400D33F19 /* AudioUnitRecorder.h */,
 				2AC18BA81FDFC1A400D33F19 /* AudioUnitRecorder.m */,
+				2A0835B91FE11EC6000FD145 /* SpeexEnc.h */,
+				2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */,
 				2A9DC2861FD97AD20020A1F0 /* Main.storyboard */,
 				2AF426A81FDE22F6009B8C9D /* audio */,
 				2A9DC2891FD97AD20020A1F0 /* Assets.xcassets */,
@@ -400,6 +405,7 @@
 				2A9DC2901FD97AD20020A1F0 /* main.m in Sources */,
 				2AC18BA91FDFC1A400D33F19 /* AudioUnitRecorder.m in Sources */,
 				2A9DC2821FD97AD10020A1F0 /* AppDelegate.m in Sources */,
+				2A0835BB1FE11EC6000FD145 /* SpeexEnc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
