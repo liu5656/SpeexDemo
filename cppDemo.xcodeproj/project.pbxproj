@@ -23,9 +23,16 @@
 		2A9DC29A1FD97AD20020A1F0 /* cppDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2991FD97AD20020A1F0 /* cppDemoTests.m */; };
 		2A9DC2A51FD97AD20020A1F0 /* cppDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2A41FD97AD20020A1F0 /* cppDemoUITests.m */; };
 		2AC18BA91FDFC1A400D33F19 /* AudioUnitRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC18BA81FDFC1A400D33F19 /* AudioUnitRecorder.m */; };
+		2AC7F38D1FE7479A00AE4C03 /* AudioUnitPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7F38C1FE7479A00AE4C03 /* AudioUnitPlayer.m */; };
+		2AC7F3911FE7571A00AE4C03 /* test.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7F3901FE7571A00AE4C03 /* test.pcm */; };
+		2AC7F3941FE75B5900AE4C03 /* AudioUnitPlayAndRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7F3931FE75B5900AE4C03 /* AudioUnitPlayAndRecord.m */; };
+		2AC7F3971FE78EB100AE4C03 /* AudioUnitRecorder2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7F3961FE78EB100AE4C03 /* AudioUnitRecorder2.m */; };
+		2AC7F39E1FE7AEFD00AE4C03 /* SpeexTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7F39D1FE7AEFD00AE4C03 /* SpeexTools.m */; };
+		2AD11E041FE360950009C455 /* originalpcm in Resources */ = {isa = PBXBuildFile; fileRef = 2AD11E031FE360950009C455 /* originalpcm */; };
+		2AD11E071FE367A60009C455 /* encodedpcm in Resources */ = {isa = PBXBuildFile; fileRef = 2AD11E051FE367A50009C455 /* encodedpcm */; };
+		2AD11E081FE367A60009C455 /* decodedpcm in Resources */ = {isa = PBXBuildFile; fileRef = 2AD11E061FE367A60009C455 /* decodedpcm */; };
 		2AE505401FDA709300C626A1 /* AudioQueueRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE5053F1FDA709300C626A1 /* AudioQueueRecorder.m */; };
 		2AF426A01FDE1C77009B8C9D /* CAFSample.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2AF4269F1FDE1C77009B8C9D /* CAFSample.caf */; };
-		2AF426A91FDE22F6009B8C9D /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 2AF426A81FDE22F6009B8C9D /* audio */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,10 +87,21 @@
 		2A9DC2A61FD97AD20020A1F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AC18BA71FDFC1A400D33F19 /* AudioUnitRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitRecorder.h; sourceTree = "<group>"; };
 		2AC18BA81FDFC1A400D33F19 /* AudioUnitRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitRecorder.m; sourceTree = "<group>"; };
+		2AC7F38B1FE7479A00AE4C03 /* AudioUnitPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitPlayer.h; sourceTree = "<group>"; };
+		2AC7F38C1FE7479A00AE4C03 /* AudioUnitPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitPlayer.m; sourceTree = "<group>"; };
+		2AC7F3901FE7571A00AE4C03 /* test.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.pcm; sourceTree = "<group>"; };
+		2AC7F3921FE75B5900AE4C03 /* AudioUnitPlayAndRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitPlayAndRecord.h; sourceTree = "<group>"; };
+		2AC7F3931FE75B5900AE4C03 /* AudioUnitPlayAndRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitPlayAndRecord.m; sourceTree = "<group>"; };
+		2AC7F3951FE78EB100AE4C03 /* AudioUnitRecorder2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitRecorder2.h; sourceTree = "<group>"; };
+		2AC7F3961FE78EB100AE4C03 /* AudioUnitRecorder2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitRecorder2.m; sourceTree = "<group>"; };
+		2AC7F39C1FE7AEFD00AE4C03 /* SpeexTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeexTools.h; sourceTree = "<group>"; };
+		2AC7F39D1FE7AEFD00AE4C03 /* SpeexTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeexTools.m; sourceTree = "<group>"; };
+		2AD11E031FE360950009C455 /* originalpcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = originalpcm; sourceTree = "<group>"; };
+		2AD11E051FE367A50009C455 /* encodedpcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = encodedpcm; sourceTree = "<group>"; };
+		2AD11E061FE367A60009C455 /* decodedpcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = decodedpcm; sourceTree = "<group>"; };
 		2AE5053E1FDA709300C626A1 /* AudioQueueRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioQueueRecorder.h; sourceTree = "<group>"; };
 		2AE5053F1FDA709300C626A1 /* AudioQueueRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioQueueRecorder.m; sourceTree = "<group>"; };
 		2AF4269F1FDE1C77009B8C9D /* CAFSample.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CAFSample.caf; sourceTree = "<group>"; };
-		2AF426A81FDE22F6009B8C9D /* audio */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,25 +236,25 @@
 		2A9DC27F1FD97AD10020A1F0 /* cppDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2AC7F3981FE7AE5300AE4C03 /* Speex */,
+				2AC7F38F1FE754CD00AE4C03 /* AudioUnit */,
+				2AC7F38E1FE754B400AE4C03 /* AudioQueue */,
 				2A9DC2801FD97AD10020A1F0 /* AppDelegate.h */,
 				2A9DC2811FD97AD10020A1F0 /* AppDelegate.m */,
 				2A9DC2831FD97AD10020A1F0 /* ViewController.h */,
 				2A9DC2841FD97AD20020A1F0 /* ViewController.m */,
-				2AE5053E1FDA709300C626A1 /* AudioQueueRecorder.h */,
-				2AE5053F1FDA709300C626A1 /* AudioQueueRecorder.m */,
-				2A48E7E91FDA96C400FA5E5D /* AudioQueuePlayer.h */,
-				2A48E7EA1FDA96C400FA5E5D /* AudioQueuePlayer.m */,
-				2AC18BA71FDFC1A400D33F19 /* AudioUnitRecorder.h */,
-				2AC18BA81FDFC1A400D33F19 /* AudioUnitRecorder.m */,
 				2A0835B91FE11EC6000FD145 /* SpeexEnc.h */,
 				2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */,
 				2A9DC2861FD97AD20020A1F0 /* Main.storyboard */,
-				2AF426A81FDE22F6009B8C9D /* audio */,
+				2AD11E031FE360950009C455 /* originalpcm */,
+				2AD11E061FE367A60009C455 /* decodedpcm */,
+				2AD11E051FE367A50009C455 /* encodedpcm */,
 				2A9DC2891FD97AD20020A1F0 /* Assets.xcassets */,
 				2A9DC28B1FD97AD20020A1F0 /* LaunchScreen.storyboard */,
 				2A9DC28E1FD97AD20020A1F0 /* Info.plist */,
 				2A9DC28F1FD97AD20020A1F0 /* main.m */,
 				2AF4269F1FDE1C77009B8C9D /* CAFSample.caf */,
+				2AC7F3901FE7571A00AE4C03 /* test.pcm */,
 				2A08359C1FE0B821000FD145 /* speexlib */,
 			);
 			path = cppDemo;
@@ -258,6 +276,41 @@
 				2A9DC2A61FD97AD20020A1F0 /* Info.plist */,
 			);
 			path = cppDemoUITests;
+			sourceTree = "<group>";
+		};
+		2AC7F38E1FE754B400AE4C03 /* AudioQueue */ = {
+			isa = PBXGroup;
+			children = (
+				2AE5053E1FDA709300C626A1 /* AudioQueueRecorder.h */,
+				2AE5053F1FDA709300C626A1 /* AudioQueueRecorder.m */,
+				2A48E7E91FDA96C400FA5E5D /* AudioQueuePlayer.h */,
+				2A48E7EA1FDA96C400FA5E5D /* AudioQueuePlayer.m */,
+			);
+			path = AudioQueue;
+			sourceTree = "<group>";
+		};
+		2AC7F38F1FE754CD00AE4C03 /* AudioUnit */ = {
+			isa = PBXGroup;
+			children = (
+				2AC18BA71FDFC1A400D33F19 /* AudioUnitRecorder.h */,
+				2AC18BA81FDFC1A400D33F19 /* AudioUnitRecorder.m */,
+				2AC7F38B1FE7479A00AE4C03 /* AudioUnitPlayer.h */,
+				2AC7F38C1FE7479A00AE4C03 /* AudioUnitPlayer.m */,
+				2AC7F3951FE78EB100AE4C03 /* AudioUnitRecorder2.h */,
+				2AC7F3961FE78EB100AE4C03 /* AudioUnitRecorder2.m */,
+				2AC7F3921FE75B5900AE4C03 /* AudioUnitPlayAndRecord.h */,
+				2AC7F3931FE75B5900AE4C03 /* AudioUnitPlayAndRecord.m */,
+			);
+			path = AudioUnit;
+			sourceTree = "<group>";
+		};
+		2AC7F3981FE7AE5300AE4C03 /* Speex */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7F39C1FE7AEFD00AE4C03 /* SpeexTools.h */,
+				2AC7F39D1FE7AEFD00AE4C03 /* SpeexTools.m */,
+			);
+			path = Speex;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,9 +421,12 @@
 			files = (
 				2A0835B31FE0B821000FD145 /* libspeex.la in Resources */,
 				2A0835B51FE0B821000FD145 /* manual.pdf in Resources */,
+				2AD11E041FE360950009C455 /* originalpcm in Resources */,
 				2A9DC28D1FD97AD20020A1F0 /* LaunchScreen.storyboard in Resources */,
+				2AD11E071FE367A60009C455 /* encodedpcm in Resources */,
 				2AF426A01FDE1C77009B8C9D /* CAFSample.caf in Resources */,
-				2AF426A91FDE22F6009B8C9D /* audio in Resources */,
+				2AC7F3911FE7571A00AE4C03 /* test.pcm in Resources */,
+				2AD11E081FE367A60009C455 /* decodedpcm in Resources */,
 				2A0835B41FE0B821000FD145 /* speex.m4 in Resources */,
 				2A9DC28A1FD97AD20020A1F0 /* Assets.xcassets in Resources */,
 				2A0835B11FE0B821000FD145 /* speex.pc in Resources */,
@@ -400,12 +456,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A9DC2851FD97AD20020A1F0 /* ViewController.m in Sources */,
+				2AC7F3941FE75B5900AE4C03 /* AudioUnitPlayAndRecord.m in Sources */,
 				2A48E7EB1FDA96C400FA5E5D /* AudioQueuePlayer.m in Sources */,
 				2AE505401FDA709300C626A1 /* AudioQueueRecorder.m in Sources */,
+				2AC7F38D1FE7479A00AE4C03 /* AudioUnitPlayer.m in Sources */,
 				2A9DC2901FD97AD20020A1F0 /* main.m in Sources */,
+				2AC7F39E1FE7AEFD00AE4C03 /* SpeexTools.m in Sources */,
 				2AC18BA91FDFC1A400D33F19 /* AudioUnitRecorder.m in Sources */,
 				2A9DC2821FD97AD10020A1F0 /* AppDelegate.m in Sources */,
 				2A0835BB1FE11EC6000FD145 /* SpeexEnc.c in Sources */,
+				2AC7F3971FE78EB100AE4C03 /* AudioUnitRecorder2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
