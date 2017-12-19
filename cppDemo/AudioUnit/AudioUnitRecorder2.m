@@ -18,7 +18,6 @@
 @interface AudioUnitRecorder2()
 {
     AudioUnit           audioUnit;
-    AudioBufferList     *mBufferList;
 }
 @property (nonatomic, weak) id<AudioUnitRecorderDelegate> delegate;
 
@@ -40,12 +39,11 @@
 - (void)setupSession {
     NSError *error = nil;
     AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryRecord error:&error];
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
     if (error) {
         NSLog(@"setup audio category failed:%@", error);
         return;
     }
-    [session setPreferredIOBufferDuration:0.05 error:&error];
     [session setActive:YES error:&error];
     if (error) {
         NSLog(@"turn on sesstion failed:%@", error);
@@ -54,7 +52,7 @@
 }
 
 - (BOOL)initializeAudioUnit {
-    AudioComponentDescription desc;
+    AudioComponentDescription desc = {0};
     desc.componentType = kAudioUnitType_Output;
     desc.componentSubType = kAudioUnitSubType_RemoteIO;
     desc.componentManufacturer = kAudioUnitManufacturer_Apple;
@@ -74,14 +72,6 @@
                                            &flag,
                                            sizeof(flag));
     return (status == noErr) ? YES : NO;
-}
-
-- (void)setupBufferList {
-    mBufferList = (AudioBufferList *)malloc(sizeof(AudioBufferList));
-    mBufferList->mNumberBuffers = 1;
-    mBufferList->mBuffers[0].mNumberChannels = 1;
-    mBufferList->mBuffers[0].mDataByteSize = MAX_FRAMES * sizeof(short);
-    mBufferList->mBuffers[0].mData = (short *)malloc(sizeof(short) * MAX_FRAMES);
 }
 
 - (BOOL)setupStreamFormat {
@@ -124,8 +114,13 @@ static OSStatus recordingCallback(void *inRefCon,
                                   UInt32 inNumberFrames,
                                   AudioBufferList *ioData) {
     AudioUnitRecorder2 *recorder = (__bridge AudioUnitRecorder2*)inRefCon;
-    AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, recorder->mBufferList);
-    [recorder handleRecordData:[NSData dataWithBytes:recorder->mBufferList->mBuffers[0].mData length:recorder->mBufferList->mBuffers[0].mDataByteSize]];
+    AudioBufferList bufferList;
+    bufferList.mNumberBuffers = 1;
+    bufferList.mBuffers[0].mData = NULL;
+    bufferList.mBuffers[0].mDataByteSize = 0;
+    AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, &bufferList);
+
+    [recorder handleRecordData:[NSData dataWithBytes:bufferList.mBuffers[0].mData length:bufferList.mBuffers[0].mDataByteSize]];
     return noErr;
 }
 
@@ -133,7 +128,6 @@ static OSStatus recordingCallback(void *inRefCon,
     [self setupSession];
     [self initializeAudioUnit];
     [self setupEnableIO];
-    [self setupBufferList];
     [self setupStreamFormat];
     [self setupCallback];
     OSStatus status = AudioUnitInitialize(audioUnit);
@@ -144,28 +138,24 @@ static OSStatus recordingCallback(void *inRefCon,
 }
 
 - (void)startRecord {
-    if (audioUnit) {
-        OSStatus status = AudioOutputUnitStart(audioUnit);
+        AudioOutputUnitStart(audioUnit);
         NSLog(@"");
-    }
 }
 
 - (void)stopRecord {
-    if (audioUnit) {
         AudioOutputUnitStop(audioUnit);
-        AudioComponentInstanceDispose(audioUnit);
-        audioUnit = NULL;
-        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/222.pcm"];
-        BOOL result = [self.audioData writeToFile:path atomically:YES];
-        NSLog(@"save result:%d", result);
-    }
+//        AudioComponentInstanceDispose(audioUnit);
+//        audioUnit = NULL;
+//        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/2212.pcm"];
+//        BOOL result = [self.audioData writeToFile:path atomically:YES];
+//        NSLog(@"save result:%d", result);
 }
 
 - (void)handleRecordData:(NSData *)data {
     if (data.length == 0) return;
     if ([self.delegate respondsToSelector:@selector(AURecorder:andData:)]) {
         [self.delegate AURecorder:self andData:data];
-        [self.audioData appendData:data];
+//        [self.audioData appendData:data];
     }
 }
 
