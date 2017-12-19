@@ -20,13 +20,23 @@
 @implementation AudioUnitPlayAndRecord
 {
     AudioUnit           audioUnit;
-    AudioBufferList     *mBufferList;
+    AudioBufferList     bufferList;
     NSInputStream       *inputStream;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [self initialRecord];
+    }
+    return self;
+}
+
 - (void)playAndRecord {
-    [self initialRecord];
     AudioOutputUnitStart(audioUnit);
+}
+
+- (void)stop {
+    AudioOutputUnitStop(audioUnit);
 }
 
 - (void)initialRecord {
@@ -115,12 +125,6 @@
                                   sizeof(callbackStruct));
     checkStatus2(status, "Set output callback failed");
     
-    mBufferList = (AudioBufferList *)malloc(sizeof(AudioBufferList));
-    mBufferList->mNumberBuffers = 1;
-    mBufferList->mBuffers[0].mNumberChannels = 1;
-    mBufferList->mBuffers[0].mDataByteSize = 2048 * sizeof(short);
-    mBufferList->mBuffers[0].mData = (short *)malloc(sizeof(short) * 2048);
-    
     // Initialise
     status = AudioUnitInitialize(audioUnit);
     checkStatus2(status, "Disable buffer allocation for the recorder failed");
@@ -134,8 +138,12 @@ static OSStatus recordingCallback(void *inRefCon,
                                   UInt32 inBusNumber,
                                   UInt32 inNumberFrames,
                                   AudioBufferList *ioData) {
+
     AudioUnitPlayAndRecord *recorder = (__bridge AudioUnitPlayAndRecord*)inRefCon;
-    AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, recorder->mBufferList);
+    recorder->bufferList.mNumberBuffers = 1;
+    recorder->bufferList.mBuffers[0].mData = NULL;
+    recorder->bufferList.mBuffers[0].mDataByteSize = 0;
+    AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, &recorder->bufferList);
     return noErr;
 }
 
@@ -146,9 +154,9 @@ static OSStatus playbackCallback(void *inRefCon,
                                  UInt32 inNumberFrames,
                                  AudioBufferList *ioData) {
     AudioUnitPlayAndRecord *recorder = (__bridge AudioUnitPlayAndRecord*)inRefCon;
-    ioData->mBuffers[0].mData = recorder->mBufferList->mBuffers[0].mData;
-    ioData->mBuffers[0].mDataByteSize = recorder->mBufferList->mBuffers[0].mDataByteSize;
-    ioData->mBuffers[0].mNumberChannels = recorder->mBufferList->mBuffers[0].mNumberChannels;
+    ioData->mBuffers[0].mData = recorder->bufferList.mBuffers[0].mData;
+    ioData->mBuffers[0].mDataByteSize = recorder->bufferList.mBuffers[0].mDataByteSize;
+    ioData->mBuffers[0].mNumberChannels = recorder->bufferList.mBuffers[0].mNumberChannels;
     ioData->mNumberBuffers = 1;
     return noErr;
 }

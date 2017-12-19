@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface AudioUnitPlayAndRecord : NSObject
+- (void)stop;
 - (void)playAndRecord;
 @end
