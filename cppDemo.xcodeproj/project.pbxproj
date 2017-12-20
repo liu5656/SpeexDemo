@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A01AA191FEA62D50072034B /* PlayAndRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A01AA181FEA62D50072034B /* PlayAndRecordManager.m */; };
 		2A0835BB1FE11EC6000FD145 /* SpeexEnc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */; };
 		2A10EBE91FE8AC7D00F070A4 /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A10EB821FE8AC7D00F070A4 /* framing.c */; };
 		2A10EBEA1FE8AC7D00F070A4 /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A10EB831FE8AC7D00F070A4 /* bitwise.c */; };
@@ -93,6 +94,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A01AA171FEA62D50072034B /* PlayAndRecordManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayAndRecordManager.h; sourceTree = "<group>"; };
+		2A01AA181FEA62D50072034B /* PlayAndRecordManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayAndRecordManager.m; sourceTree = "<group>"; };
 		2A0835B91FE11EC6000FD145 /* SpeexEnc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeexEnc.h; sourceTree = "<group>"; };
 		2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SpeexEnc.c; sourceTree = "<group>"; };
 		2A10EB7D1FE8AC7D00F070A4 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -502,6 +505,8 @@
 			children = (
 				2AC7F39C1FE7AEFD00AE4C03 /* SpeexTools.h */,
 				2AC7F39D1FE7AEFD00AE4C03 /* SpeexTools.m */,
+				2A01AA171FEA62D50072034B /* PlayAndRecordManager.h */,
+				2A01AA181FEA62D50072034B /* PlayAndRecordManager.m */,
 			);
 			path = Speex;
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 				2A10EC0A1FE8AC7D00F070A4 /* speex.c in Sources */,
 				2A10EBFA1FE8AC7D00F070A4 /* cb_search.c in Sources */,
 				2A48E7EB1FDA96C400FA5E5D /* AudioQueuePlayer.m in Sources */,
+				2A01AA191FEA62D50072034B /* PlayAndRecordManager.m in Sources */,
 				2A10EBED1FE8AC7D00F070A4 /* kiss_fft.c in Sources */,
 				2A10EC031FE8AC7D00F070A4 /* exc_10_16_table.c in Sources */,
 				2A10EC091FE8AC7D00F070A4 /* exc_5_256_table.c in Sources */,
