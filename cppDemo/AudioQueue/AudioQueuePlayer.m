@@ -123,7 +123,7 @@ void AQOutputCallback(void * __nullable inUserData, AudioQueueRef inAQ, AudioQue
 }
 
 static int i = 0;
-- (void)playWithData:(Byte *)buffer andSize:(UInt32)length {
+- (void)playWithData:(const void *)buffer andSize:(UInt32)length {
     if (length > 0) {
         mBuffers[i]->mAudioDataByteSize = length;
         memset(mBuffers[i]->mAudioData, 0, length);

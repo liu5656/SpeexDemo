@@ -138,7 +138,7 @@ static OSStatus recordingCallback(void *inRefCon,
 }
 
 - (void)startRecord {
-        AudioOutputUnitStart(audioUnit);
+        OSStatus status = AudioOutputUnitStart(audioUnit);
         NSLog(@"");
 }
 

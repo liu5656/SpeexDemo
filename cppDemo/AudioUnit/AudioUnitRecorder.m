@@ -11,7 +11,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "AudioQueuePlayer.h"
+#import "SpeexTools.h"
 
 #import "speex.h"
 
@@ -25,22 +25,22 @@
 
 
 @interface AudioUnitRecorder(){
-    AudioComponentInstance    audioUnit;
-    AudioBufferList           *mBufferList;
+    AudioComponentInstance      audioUnit;
+    AudioBufferList             bufferList;
     
     // speex
-    SpeexBits                 enc_bits;
-    void                      *enc_state;
-    int                       enc_frame_size;
-    NSMutableData             *encodingData;
+    SpeexBits                   enc_bits;
+    void                        *enc_state;
+    int                         enc_frame_size;
+    NSMutableData               *encodingData;
+    NSMutableData               *encodedData;
     
-    SpeexBits                 dec_bits;
-    void                      *dec_state;
-    int                       dec_frame_size;
-    NSMutableData             *decodingData;
+    SpeexBits                   dec_bits;
+    void                        *dec_state;
+    int                         dec_frame_size;
+    NSMutableData               *decodingData;
+    NSMutableData               *decodedData;
 }
-
-@property (nonatomic, strong) AudioQueuePlayer      *player;
 @end
 
 
@@ -71,21 +71,18 @@ void checkStatus(OSStatus status, char error[]) {
 - (instancetype)init{
     if (self = [super init]) {
         
-        [self setupSession];
+        encodedData = [NSMutableData data];
+        decodedData = [NSMutableData data];
         
-        // Describe audio component
+        [self setupSession];
         AudioComponentDescription           desc;
         desc.componentType                  = kAudioUnitType_Output;
-//        desc.componentSubType               = kAudioUnitSubType_RemoteIO;
         desc.componentSubType               = kAudioUnitSubType_VoiceProcessingIO;
+//        desc.componentSubType               = kAudioUnitSubType_RemoteIO;
         desc.componentFlags                 = 0;
         desc.componentFlagsMask             = 0;
         desc.componentManufacturer          = kAudioUnitManufacturer_Apple;
-        
-        // Get component
         AudioComponent inputComponent = AudioComponentFindNext(NULL, &desc);
-        
-        // Get audio units
         OSStatus status = AudioComponentInstanceNew(inputComponent, &audioUnit);
         checkStatus(status, "get audio units fialed");
         
@@ -164,26 +161,6 @@ void checkStatus(OSStatus status, char error[]) {
                                       sizeof(callbackStruct));
         checkStatus(status, "Set output callback failed");
         
-//        // set echo cancellation
-//        UInt32 echoCancellation = 1;
-//        checkStatus(AudioUnitSetProperty(audioUnit, kAUVoiceIOProperty_BypassVoiceProcessing, kAudioUnitScope_Global, 1, &echoCancellation, sizeof(echoCancellation)), "set echo cancellation failed");
-        
-        // Disable buffer allocation for the recorder (optional - do this if we want to pass in our own)
-        flag = 0;
-        status = AudioUnitSetProperty(audioUnit,
-                                      kAudioUnitProperty_ShouldAllocateBuffer,
-                                      kAudioUnitScope_Output,
-                                      kInputBus,
-                                      &flag,
-                                      sizeof(flag));
-        checkStatus(status, "Disable buffer allocation for the recorder failed");
-        
-        mBufferList = (AudioBufferList *)malloc(sizeof(AudioBufferList));
-        mBufferList->mNumberBuffers = 1;
-        mBufferList->mBuffers[0].mNumberChannels = 1;
-        mBufferList->mBuffers[0].mDataByteSize = 2048 * sizeof(short);
-        mBufferList->mBuffers[0].mData = (short *)malloc(sizeof(short) * 2048);
-        
         // Initialise
         status = AudioUnitInitialize(audioUnit);
         checkStatus(status, "Disable buffer allocation for the recorder failed");
@@ -211,65 +188,70 @@ static OSStatus recordingCallback(void *inRefCon,
                                   UInt32 inBusNumber,
                                   UInt32 inNumberFrames,
                                   AudioBufferList *ioData) {
+    
     AudioUnitRecorder *recorder = (__bridge AudioUnitRecorder*)inRefCon;
-
-    AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, recorder->mBufferList);
-    
-    
-    NSData *originald = [NSData dataWithBytes:recorder->mBufferList->mBuffers[0].mData length:recorder->mBufferList->mBuffers[0].mDataByteSize];
-    
-    NSLog(@"++++++++++++++++%@", originald);
-    
-//    NSData *encoded = [recorder compressData:recorder->mBufferList->mBuffers[0].mData andLengthOfShort:recorder->mBufferList->mBuffers[0].mDataByteSize * 0.5];
-//    NSData *decoded = [recorder uncompressData:encoded.bytes andLength:encoded.length];
-    
-    
-    
-//    printf("+++++++inBus:%d--Frames:%d---byteSize:%d\n", inBusNumber, inNumberFrames, recorder->mBufferList->mBuffers[0].mDataByteSize);
-//    printf("+++++++%p\n", recorder->mBufferList);
+    recorder->bufferList.mNumberBuffers = 1;
+    recorder->bufferList.mBuffers[0].mData = NULL;
+    recorder->bufferList.mBuffers[0].mDataByteSize = 0;
+    AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, &recorder->bufferList);
+    [recorder->encodedData appendData:[[SpeexTools shared] compressData:recorder->bufferList.mBuffers[0].mData andLengthOfShort:recorder->bufferList.mBuffers[0].mDataByteSize]];
+    NSLog(@"------------");
     return noErr;
 }
 
-static int xx = 0;
 static OSStatus playbackCallback(void *inRefCon,
-                                AudioUnitRenderActionFlags *ioActionFlags,
-                                const AudioTimeStamp *inTimeStamp,
-                                UInt32 inBusNumber,
-                                UInt32 inNumberFrames,
-                                AudioBufferList *ioData) {
+                                 AudioUnitRenderActionFlags *ioActionFlags,
+                                 const AudioTimeStamp *inTimeStamp,
+                                 UInt32 inBusNumber,
+                                 UInt32 inNumberFrames,
+                                 AudioBufferList *ioData) {
     AudioUnitRecorder *recorder = (__bridge AudioUnitRecorder*)inRefCon;
-//    memset(ioData->mBuffers[0].mData, 0, ioData->mBuffers[0].mDataByteSize);
+    NSLog(@"              ------------");
+    ioData->mBuffers[0].mData = recorder->bufferList.mBuffers[0].mData;
+    ioData->mBuffers[0].mDataByteSize = recorder->bufferList.mBuffers[0].mDataByteSize;
+    ioData->mBuffers[0].mNumberChannels = recorder->bufferList.mBuffers[0].mNumberChannels;
+    ioData->mNumberBuffers = 1;
     
-//    NSData *data = [recorder->encodingData subdataWithRange:NSMakeRange(xx * Packet_Byte_Compressed, Packet_Byte_Compressed)];
-//    xx++;
-//    if (xx * Packet_Byte_Compressed > recorder->encodingData.length) {
-//        xx = 0;
+//    memset(ioData, 0, inNumberFrames * 2);
+//    NSData *data = [recorder getUncompressDataLength:inNumberFrames * 2];
+//    if (data >= (inNumberFrames * 2)) {
+//        ioData->mBuffers[0].mData = data.bytes;
+////        ioData->mBuffers[0].mData = recorder->bufferList.mBuffers[0].mData;
+//        ioData->mBuffers[0].mDataByteSize = recorder->bufferList.mBuffers[0].mDataByteSize;
+//        ioData->mBuffers[0].mNumberChannels = recorder->bufferList.mBuffers[0].mNumberChannels;
+//        ioData->mNumberBuffers = 1;
 //    }
-//    NSData *audio = [recorder uncompressData:data.bytes andLength:data.length];
-//    ioData->mBuffers[0].mData = audio.bytes;
-//    ioData->mBuffers[0].mDataByteSize = audio.length;
-    AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, 1, inNumberFrames, ioData);
-    
-    NSData *originald = [NSData dataWithBytes:ioData->mBuffers[0].mData length:ioData->mBuffers[0].mDataByteSize];
 
-    NSLog(@"------------------%@", originald);
-    
-//    printf("----------------------------------------inbus:%d--frames:%d --size:%d\n", inBusNumber, inNumberFrames, ioData->mBuffers[0].mDataByteSize);
-    
-//    printf("-----------------------------------------inBus:%d--Frames:%d---byteSize:%d\n", inBusNumber, inNumberFrames, recorder->mBufferList->mBuffers[0].mDataByteSize);
-    
-//    printf("-----%p\n", ioData);
     return noErr;
 }
 
-- (AudioQueuePlayer *)player {
-    if (!_player) {
-        _player = [[AudioQueuePlayer alloc] init];
-    }
-    return _player;
-}
 
 /*=========================================speex encoding====================================================*/
+
+- (NSData *)getUncompressDataLength:(UInt32)length {
+    NSInteger total = encodedData.length;
+    int i = 0;
+    while (total > Packet_Byte_Compressed) {
+        NSData *packet = [encodedData subdataWithRange:NSMakeRange(i * Packet_Byte_Compressed, Packet_Byte_Compressed)];
+        NSData *data = [[SpeexTools shared] uncompressData:(char *)packet.bytes andLength:(UInt32)packet.length];
+        [decodedData appendData:data];
+        if (decodedData.length > length) {
+            break;
+        }
+        total -= Packet_Byte_Compressed;
+        if (total > Packet_Byte_Compressed) {
+            i++;
+        }
+    }
+    if (decodedData.length > length) {
+        NSData *data = [decodedData subdataWithRange:NSMakeRange(0, length)];
+        [decodedData replaceBytesInRange:NSMakeRange(0, length) withBytes:NULL length:0];
+        return data;
+    }
+    [encodedData replaceBytesInRange:NSMakeRange(0, i * Packet_Byte_Compressed) withBytes:NULL length:0];
+    return nil;
+}
+
 
 - (void)testDecodedPlay {
     [self configSpeexDecoder];

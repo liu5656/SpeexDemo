@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface SpeexTools : NSObject
++ (instancetype)shared;
+- (NSData *)compressData:(const void *)data andLengthOfShort:(UInt32)dataSize;
+- (NSData *)uncompressData:(const void *)data andLength:(UInt32)dataSize;
 
 @end

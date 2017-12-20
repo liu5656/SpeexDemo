@@ -17,6 +17,8 @@
 
 #import "AudioUnitPlayAndRecord.h"
 
+#import "SpeexTools.h"
+
 //#import "speex.h"
 
 
@@ -54,6 +56,16 @@
     }
 }
 
+// 测试speex预处理
+- (IBAction)speexPreprocessTest:(UIButton *)sender {
+    if (sender.selected) {
+        [self.AUrecorder stopRecord];
+    }else{
+        [self.AUrecorder startRecord];
+    }
+    sender.selected = !sender.selected;
+}
+
 // audio unit 边录边播放
 - (IBAction)AudioUnitControl:(UIButton *)sender {
     if (!sender.selected) { // 开始
@@ -66,6 +78,7 @@
 - (IBAction)audioUnitPlay:(UIButton *)sender {
     [self.AUplayer play];
 }
+
 - (IBAction)audioUnitRecord:(UIButton *)sender {
     if (sender.selected) {
         [self.AUrecorder stopRecord];
@@ -73,10 +86,15 @@
         [self.AUrecorder startRecord];
     }
     sender.selected = !sender.selected;
-    
 }
+
 - (IBAction)audioUnitRecordAndPlay:(UIButton *)sender {
-    [self.playAndrecorder playAndRecord];
+    if (sender.selected) {
+        [self.playAndrecorder stop];
+    }else{
+        [self.playAndrecorder playAndRecord];
+    }
+    sender.selected = !sender.selected;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -128,6 +146,22 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark AudioUnitRecorderDelegate
+- (void)AURecorder:(AudioUnitRecorder2 *)recoder andData:(NSData *)data {
+    if (data.length == 0) return;
+    @autoreleasepool {
+//            NSLog(@"++++++++++%@",data);
+        NSData *temp = [[SpeexTools shared] compressData:data.bytes andLengthOfShort:(UInt32)data.length];
+        NSData *decode = [[SpeexTools shared] uncompressData:temp.bytes andLength:(UInt32)temp.length];
+//            NSLog(@"----------%@",decode);
+//        printf("\n\n\n");
+
+        [self.AQplayer playWithData:(Byte *)decode.bytes andSize:(UInt32)decode.length];
+        
+//        [self.AQplayer playWithData:data.bytes andSize:data.length];
+    }
 }
 
 

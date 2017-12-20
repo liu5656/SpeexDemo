@@ -10,6 +10,6 @@
 
 @interface AudioQueuePlayer : NSObject
 - (void)pause;
-- (void)playWithData:(Byte *)buffer andSize:(UInt32)length;
+- (void)playWithData:(const void *)buffer andSize:(UInt32)length;
 
 @end
