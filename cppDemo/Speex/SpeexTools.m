@@ -9,6 +9,7 @@
 #import "SpeexTools.h"
 #include "speex.h"
 #import "speex_preprocess.h"
+#import "speex_echo.h"
 
 #define  MAX_NB_BYTES 200
 #define Speex_Compression_Quality 8
@@ -20,17 +21,21 @@
 @interface SpeexTools ()
 {
     // speex
-    SpeexBits                 enc_bits;
-    void                      *enc_state;
-    int                       enc_frame_size;
-    NSMutableData             *encodingData;
+    SpeexBits                   enc_bits;
+    void                        *enc_state;
+    int                         enc_frame_size;
+    NSMutableData               *encodingData;
     
-    SpeexBits                 dec_bits;
-    void                      *dec_state;
-    int                       dec_frame_size;
-    NSMutableData             *decodingData;
+    SpeexBits                   dec_bits;
+    void                        *dec_state;
+    int                         dec_frame_size;
+    NSMutableData               *decodingData;
     
-    SpeexPreprocessState      *pState;
+    SpeexPreprocessState        *pState;
+    
+    SpeexEchoState              *echoState;
+    
+    NSData                      *speakerData;
 }
 @end
 
@@ -51,6 +56,13 @@
 #pragma mark tests
 
 #pragma mark echo cancellation
+static SpeexEchoState *configureSpeexEchoCancellation(int frame_size, int filter_length, SpeexPreprocessState *pstate) {
+    SpeexEchoState *state = speex_echo_state_init(frame_size, filter_length);
+    int sample_rate = Sample_Rate;
+    speex_echo_ctl(state, SPEEX_ECHO_SET_SAMPLING_RATE, &sample_rate);
+    speex_preprocess_ctl(pstate, SPEEX_PREPROCESS_SET_ECHO_STATE, state);
+    return state;
+}
 
 #pragma mark denoise
 //speex不是线程安全的，如多线程调用必须加锁
@@ -60,6 +72,14 @@ static SpeexPreprocessState *configureSpeexDenoise(int frame_size, int sample_ra
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_DENOISE, &value);
     value = -25;
     speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_NOISE_SUPPRESS, &value); //降噪强度
+    
+    
+    int agc = 1;
+    int level = 24000;
+    //actually default is 8000(0,32768),here make it louder for voice is not loudy enough by default.
+    speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_AGC, &agc);// 增益
+    speex_preprocess_ctl(state, SPEEX_PREPROCESS_SET_AGC_LEVEL,&level);// 增益后的值
+    
     return state;
 }
 
@@ -140,6 +160,7 @@ static SpeexPreprocessState *configureSpeexDenoise(int frame_size, int sample_ra
     speex_encoder_ctl(enc_state, SPEEX_SET_QUALITY, &tmp);
     
     pState = configureSpeexDenoise(enc_frame_size, Sample_Rate);
+//    echoState = configureSpeexEchoCancellation(enc_frame_size, enc_frame_size * 10, pState);
 }
 
 #pragma mark destroy function
