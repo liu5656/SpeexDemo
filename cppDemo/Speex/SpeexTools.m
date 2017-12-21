@@ -113,7 +113,7 @@ static SpeexPreprocessState *configureSpeexDenoise(int frame_size, int sample_ra
     NSMutableData *encodedData = [NSMutableData data];
     for (int i = 0; i < packets; ) {
         
-//        speex_preprocess_run(pState, tempBytes);
+        speex_preprocess_run(pState, tempBytes);
         
         speex_bits_reset(&enc_bits);
         speex_encode_int(enc_state, tempBytes, &enc_bits);

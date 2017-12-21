@@ -14,6 +14,8 @@
 
 - (BOOL)startRecord;
 - (BOOL)stopRecord;
-+ (BOOL)playAudio:(const void *)data andLength:(UInt32)size;
+- (BOOL)playAudio:(const void *)data andLength:(UInt32)size;
+- (BOOL)pausePlay;
+- (BOOL)resumePlay;
 
 @end
