@@ -24,25 +24,25 @@
 		2A9DC2901FD97AD20020A1F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC28F1FD97AD20020A1F0 /* main.m */; };
 		2A9DC29A1FD97AD20020A1F0 /* cppDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2991FD97AD20020A1F0 /* cppDemoTests.m */; };
 		2A9DC2A51FD97AD20020A1F0 /* cppDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2A41FD97AD20020A1F0 /* cppDemoUITests.m */; };
-		2AB182F41FEB50EA0041E07E /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 2AB182C51FEB50EA0041E07E /* Makefile.am */; };
-		2AB182F51FEB50EA0041E07E /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB182C81FEB50EA0041E07E /* Makefile.in */; };
-		2AB182F61FEB50EA0041E07E /* speexdsp_config_types.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB182C91FEB50EA0041E07E /* speexdsp_config_types.h.in */; };
-		2AB182F71FEB50EA0041E07E /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 2AB182CA1FEB50EA0041E07E /* Makefile.am */; };
-		2AB182F81FEB50EA0041E07E /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB182CB1FEB50EA0041E07E /* Makefile.in */; };
-		2AB182F91FEB50EA0041E07E /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182D11FEB50EA0041E07E /* kiss_fft.c */; };
-		2AB182FA1FEB50EA0041E07E /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182D41FEB50EA0041E07E /* buffer.c */; };
-		2AB182FB1FEB50EA0041E07E /* fftwrap.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182D71FEB50EA0041E07E /* fftwrap.c */; };
-		2AB182FC1FEB50EA0041E07E /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182D91FEB50EA0041E07E /* kiss_fftr.c */; };
-		2AB182FD1FEB50EA0041E07E /* jitter.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182DB1FEB50EA0041E07E /* jitter.c */; };
-		2AB182FE1FEB50EA0041E07E /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 2AB182DD1FEB50EA0041E07E /* Makefile.am */; };
-		2AB182FF1FEB50EA0041E07E /* filterbank.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182DE1FEB50EA0041E07E /* filterbank.c */; };
-		2AB183011FEB50EA0041E07E /* resample.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182E11FEB50EA0041E07E /* resample.c */; };
-		2AB183021FEB50EA0041E07E /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182E21FEB50EA0041E07E /* smallft.c */; };
-		2AB183031FEB50EA0041E07E /* preprocess.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182E31FEB50EA0041E07E /* preprocess.c */; };
-		2AB183051FEB50EA0041E07E /* mdf.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182E61FEB50EA0041E07E /* mdf.c */; };
-		2AB183061FEB50EA0041E07E /* echo_diagnostic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182E81FEB50EA0041E07E /* echo_diagnostic.m */; };
-		2AB183081FEB50EA0041E07E /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB182EE1FEB50EA0041E07E /* Makefile.in */; };
-		2AB1830A1FEB50EA0041E07E /* scal.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB182F11FEB50EA0041E07E /* scal.c */; };
+		2AB1833D1FEB5C830041E07E /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 2AB183121FEB5C830041E07E /* Makefile.am */; };
+		2AB1833E1FEB5C830041E07E /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB183151FEB5C830041E07E /* Makefile.in */; };
+		2AB1833F1FEB5C830041E07E /* speexdsp_config_types.h.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB183161FEB5C830041E07E /* speexdsp_config_types.h.in */; };
+		2AB183401FEB5C830041E07E /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 2AB183171FEB5C830041E07E /* Makefile.am */; };
+		2AB183411FEB5C830041E07E /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB183181FEB5C830041E07E /* Makefile.in */; };
+		2AB183421FEB5C830041E07E /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1831E1FEB5C830041E07E /* kiss_fft.c */; };
+		2AB183431FEB5C830041E07E /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB183211FEB5C830041E07E /* buffer.c */; };
+		2AB183441FEB5C830041E07E /* fftwrap.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB183241FEB5C830041E07E /* fftwrap.c */; };
+		2AB183451FEB5C830041E07E /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB183261FEB5C830041E07E /* kiss_fftr.c */; };
+		2AB183461FEB5C830041E07E /* jitter.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB183281FEB5C830041E07E /* jitter.c */; };
+		2AB183471FEB5C830041E07E /* Makefile.am in Resources */ = {isa = PBXBuildFile; fileRef = 2AB1832A1FEB5C830041E07E /* Makefile.am */; };
+		2AB183481FEB5C830041E07E /* filterbank.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1832B1FEB5C830041E07E /* filterbank.c */; };
+		2AB183491FEB5C830041E07E /* resample.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1832D1FEB5C830041E07E /* resample.c */; };
+		2AB1834A1FEB5C830041E07E /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1832E1FEB5C830041E07E /* smallft.c */; };
+		2AB1834B1FEB5C830041E07E /* preprocess.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1832F1FEB5C830041E07E /* preprocess.c */; };
+		2AB1834C1FEB5C830041E07E /* mdf.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB183311FEB5C830041E07E /* mdf.c */; };
+		2AB1834D1FEB5C830041E07E /* echo_diagnostic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB183331FEB5C830041E07E /* echo_diagnostic.m */; };
+		2AB1834E1FEB5C830041E07E /* Makefile.in in Resources */ = {isa = PBXBuildFile; fileRef = 2AB183381FEB5C830041E07E /* Makefile.in */; };
+		2AB1834F1FEB5C830041E07E /* scal.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB1833A1FEB5C830041E07E /* scal.c */; };
 		2AC18BA91FDFC1A400D33F19 /* AudioUnitRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC18BA81FDFC1A400D33F19 /* AudioUnitRecorder.m */; };
 		2AC7F38D1FE7479A00AE4C03 /* AudioUnitPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7F38C1FE7479A00AE4C03 /* AudioUnitPlayer.m */; };
 		2AC7F3911FE7571A00AE4C03 /* test.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 2AC7F3901FE7571A00AE4C03 /* test.pcm */; };
@@ -109,52 +109,52 @@
 		2A9DC2A01FD97AD20020A1F0 /* cppDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cppDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9DC2A41FD97AD20020A1F0 /* cppDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cppDemoUITests.m; sourceTree = "<group>"; };
 		2A9DC2A61FD97AD20020A1F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2AB182C11FEB50EA0041E07E /* speex_echo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_echo.h; sourceTree = "<group>"; };
-		2AB182C21FEB50EA0041E07E /* speexdsp_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speexdsp_types.h; sourceTree = "<group>"; };
-		2AB182C31FEB50EA0041E07E /* speex_resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_resampler.h; sourceTree = "<group>"; };
-		2AB182C41FEB50EA0041E07E /* speex_preprocess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_preprocess.h; sourceTree = "<group>"; };
-		2AB182C51FEB50EA0041E07E /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		2AB182C61FEB50EA0041E07E /* speex_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_buffer.h; sourceTree = "<group>"; };
-		2AB182C71FEB50EA0041E07E /* speex_jitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_jitter.h; sourceTree = "<group>"; };
-		2AB182C81FEB50EA0041E07E /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
-		2AB182C91FEB50EA0041E07E /* speexdsp_config_types.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = speexdsp_config_types.h.in; sourceTree = "<group>"; };
-		2AB182CA1FEB50EA0041E07E /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		2AB182CB1FEB50EA0041E07E /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
-		2AB182CD1FEB50EA0041E07E /* misc_bfin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc_bfin.h; sourceTree = "<group>"; };
-		2AB182CE1FEB50EA0041E07E /* smallft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smallft.h; sourceTree = "<group>"; };
-		2AB182CF1FEB50EA0041E07E /* os_support.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_support.h; sourceTree = "<group>"; };
-		2AB182D01FEB50EA0041E07E /* filterbank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filterbank.h; sourceTree = "<group>"; };
-		2AB182D11FEB50EA0041E07E /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
-		2AB182D21FEB50EA0041E07E /* stack_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack_alloc.h; sourceTree = "<group>"; };
-		2AB182D31FEB50EA0041E07E /* fixed_arm4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_arm4.h; sourceTree = "<group>"; };
-		2AB182D41FEB50EA0041E07E /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
-		2AB182D51FEB50EA0041E07E /* fixed_generic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_generic.h; sourceTree = "<group>"; };
-		2AB182D61FEB50EA0041E07E /* fixed_arm5e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_arm5e.h; sourceTree = "<group>"; };
-		2AB182D71FEB50EA0041E07E /* fftwrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fftwrap.c; sourceTree = "<group>"; };
-		2AB182D81FEB50EA0041E07E /* pseudofloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pseudofloat.h; sourceTree = "<group>"; };
-		2AB182D91FEB50EA0041E07E /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
-		2AB182DA1FEB50EA0041E07E /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
-		2AB182DB1FEB50EA0041E07E /* jitter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jitter.c; sourceTree = "<group>"; };
-		2AB182DC1FEB50EA0041E07E /* math_approx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = math_approx.h; sourceTree = "<group>"; };
-		2AB182DD1FEB50EA0041E07E /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		2AB182DE1FEB50EA0041E07E /* filterbank.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = filterbank.c; sourceTree = "<group>"; };
-		2AB182E01FEB50EA0041E07E /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
-		2AB182E11FEB50EA0041E07E /* resample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = resample.c; sourceTree = "<group>"; };
-		2AB182E21FEB50EA0041E07E /* smallft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smallft.c; sourceTree = "<group>"; };
-		2AB182E31FEB50EA0041E07E /* preprocess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = preprocess.c; sourceTree = "<group>"; };
-		2AB182E41FEB50EA0041E07E /* resample_neon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resample_neon.h; sourceTree = "<group>"; };
-		2AB182E61FEB50EA0041E07E /* mdf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mdf.c; sourceTree = "<group>"; };
-		2AB182E71FEB50EA0041E07E /* vorbis_psy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vorbis_psy.h; sourceTree = "<group>"; };
-		2AB182E81FEB50EA0041E07E /* echo_diagnostic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = echo_diagnostic.m; sourceTree = "<group>"; };
-		2AB182E91FEB50EA0041E07E /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
-		2AB182EA1FEB50EA0041E07E /* bfin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bfin.h; sourceTree = "<group>"; };
-		2AB182EB1FEB50EA0041E07E /* fftwrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fftwrap.h; sourceTree = "<group>"; };
-		2AB182ED1FEB50EA0041E07E /* fixed_bfin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_bfin.h; sourceTree = "<group>"; };
-		2AB182EE1FEB50EA0041E07E /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
-		2AB182EF1FEB50EA0041E07E /* fixed_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_debug.h; sourceTree = "<group>"; };
-		2AB182F11FEB50EA0041E07E /* scal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scal.c; sourceTree = "<group>"; };
-		2AB182F21FEB50EA0041E07E /* resample_sse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resample_sse.h; sourceTree = "<group>"; };
-		2AB182F31FEB50EA0041E07E /* arch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arch.h; sourceTree = "<group>"; };
+		2AB1830E1FEB5C830041E07E /* speex_echo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_echo.h; sourceTree = "<group>"; };
+		2AB1830F1FEB5C830041E07E /* speexdsp_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speexdsp_types.h; sourceTree = "<group>"; };
+		2AB183101FEB5C830041E07E /* speex_resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_resampler.h; sourceTree = "<group>"; };
+		2AB183111FEB5C830041E07E /* speex_preprocess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_preprocess.h; sourceTree = "<group>"; };
+		2AB183121FEB5C830041E07E /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		2AB183131FEB5C830041E07E /* speex_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_buffer.h; sourceTree = "<group>"; };
+		2AB183141FEB5C830041E07E /* speex_jitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = speex_jitter.h; sourceTree = "<group>"; };
+		2AB183151FEB5C830041E07E /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		2AB183161FEB5C830041E07E /* speexdsp_config_types.h.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = speexdsp_config_types.h.in; sourceTree = "<group>"; };
+		2AB183171FEB5C830041E07E /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		2AB183181FEB5C830041E07E /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		2AB1831A1FEB5C830041E07E /* misc_bfin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc_bfin.h; sourceTree = "<group>"; };
+		2AB1831B1FEB5C830041E07E /* smallft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smallft.h; sourceTree = "<group>"; };
+		2AB1831C1FEB5C830041E07E /* os_support.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_support.h; sourceTree = "<group>"; };
+		2AB1831D1FEB5C830041E07E /* filterbank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filterbank.h; sourceTree = "<group>"; };
+		2AB1831E1FEB5C830041E07E /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fft.c; sourceTree = "<group>"; };
+		2AB1831F1FEB5C830041E07E /* stack_alloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack_alloc.h; sourceTree = "<group>"; };
+		2AB183201FEB5C830041E07E /* fixed_arm4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_arm4.h; sourceTree = "<group>"; };
+		2AB183211FEB5C830041E07E /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		2AB183221FEB5C830041E07E /* fixed_generic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_generic.h; sourceTree = "<group>"; };
+		2AB183231FEB5C830041E07E /* fixed_arm5e.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_arm5e.h; sourceTree = "<group>"; };
+		2AB183241FEB5C830041E07E /* fftwrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fftwrap.c; sourceTree = "<group>"; };
+		2AB183251FEB5C830041E07E /* pseudofloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pseudofloat.h; sourceTree = "<group>"; };
+		2AB183261FEB5C830041E07E /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = kiss_fftr.c; sourceTree = "<group>"; };
+		2AB183271FEB5C830041E07E /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _kiss_fft_guts.h; sourceTree = "<group>"; };
+		2AB183281FEB5C830041E07E /* jitter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = jitter.c; sourceTree = "<group>"; };
+		2AB183291FEB5C830041E07E /* math_approx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = math_approx.h; sourceTree = "<group>"; };
+		2AB1832A1FEB5C830041E07E /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		2AB1832B1FEB5C830041E07E /* filterbank.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = filterbank.c; sourceTree = "<group>"; };
+		2AB1832C1FEB5C830041E07E /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fft.h; sourceTree = "<group>"; };
+		2AB1832D1FEB5C830041E07E /* resample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = resample.c; sourceTree = "<group>"; };
+		2AB1832E1FEB5C830041E07E /* smallft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = smallft.c; sourceTree = "<group>"; };
+		2AB1832F1FEB5C830041E07E /* preprocess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = preprocess.c; sourceTree = "<group>"; };
+		2AB183301FEB5C830041E07E /* resample_neon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resample_neon.h; sourceTree = "<group>"; };
+		2AB183311FEB5C830041E07E /* mdf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mdf.c; sourceTree = "<group>"; };
+		2AB183321FEB5C830041E07E /* vorbis_psy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vorbis_psy.h; sourceTree = "<group>"; };
+		2AB183331FEB5C830041E07E /* echo_diagnostic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = echo_diagnostic.m; sourceTree = "<group>"; };
+		2AB183341FEB5C830041E07E /* kiss_fftr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kiss_fftr.h; sourceTree = "<group>"; };
+		2AB183351FEB5C830041E07E /* bfin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bfin.h; sourceTree = "<group>"; };
+		2AB183361FEB5C830041E07E /* fftwrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fftwrap.h; sourceTree = "<group>"; };
+		2AB183371FEB5C830041E07E /* fixed_bfin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_bfin.h; sourceTree = "<group>"; };
+		2AB183381FEB5C830041E07E /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		2AB183391FEB5C830041E07E /* fixed_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fixed_debug.h; sourceTree = "<group>"; };
+		2AB1833A1FEB5C830041E07E /* scal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scal.c; sourceTree = "<group>"; };
+		2AB1833B1FEB5C830041E07E /* resample_sse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resample_sse.h; sourceTree = "<group>"; };
+		2AB1833C1FEB5C830041E07E /* arch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arch.h; sourceTree = "<group>"; };
 		2AC18BA71FDFC1A400D33F19 /* AudioUnitRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitRecorder.h; sourceTree = "<group>"; };
 		2AC18BA81FDFC1A400D33F19 /* AudioUnitRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioUnitRecorder.m; sourceTree = "<group>"; };
 		2AC7F38B1FE7479A00AE4C03 /* AudioUnitPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitPlayer.h; sourceTree = "<group>"; };
@@ -326,7 +326,7 @@
 				2AF4269F1FDE1C77009B8C9D /* CAFSample.caf */,
 				2AC7F3901FE7571A00AE4C03 /* test.pcm */,
 				2A65FF501FE917D9007B7719 /* original2.pcm */,
-				2AB182BE1FEB50EA0041E07E /* speexdsp */,
+				2AB1830B1FEB5C830041E07E /* speexdsp */,
 				2A01AB2D1FEA73C10072034B /* speexlib */,
 			);
 			path = cppDemo;
@@ -350,80 +350,79 @@
 			path = cppDemoUITests;
 			sourceTree = "<group>";
 		};
-		2AB182BE1FEB50EA0041E07E /* speexdsp */ = {
+		2AB1830B1FEB5C830041E07E /* speexdsp */ = {
 			isa = PBXGroup;
 			children = (
-				2AB182BF1FEB50EA0041E07E /* include */,
-				2AB182CC1FEB50EA0041E07E /* libspeexdsp */,
+				2AB1830C1FEB5C830041E07E /* include */,
+				2AB183191FEB5C830041E07E /* libspeexdsp */,
 			);
-			name = speexdsp;
-			path = ../../speexdsp;
+			path = speexdsp;
 			sourceTree = "<group>";
 		};
-		2AB182BF1FEB50EA0041E07E /* include */ = {
+		2AB1830C1FEB5C830041E07E /* include */ = {
 			isa = PBXGroup;
 			children = (
-				2AB182C01FEB50EA0041E07E /* speex */,
-				2AB182CA1FEB50EA0041E07E /* Makefile.am */,
-				2AB182CB1FEB50EA0041E07E /* Makefile.in */,
+				2AB1830D1FEB5C830041E07E /* speex */,
+				2AB183171FEB5C830041E07E /* Makefile.am */,
+				2AB183181FEB5C830041E07E /* Makefile.in */,
 			);
 			path = include;
 			sourceTree = "<group>";
 		};
-		2AB182C01FEB50EA0041E07E /* speex */ = {
+		2AB1830D1FEB5C830041E07E /* speex */ = {
 			isa = PBXGroup;
 			children = (
-				2AB182C11FEB50EA0041E07E /* speex_echo.h */,
-				2AB182C21FEB50EA0041E07E /* speexdsp_types.h */,
-				2AB182C31FEB50EA0041E07E /* speex_resampler.h */,
-				2AB182C41FEB50EA0041E07E /* speex_preprocess.h */,
-				2AB182C51FEB50EA0041E07E /* Makefile.am */,
-				2AB182C61FEB50EA0041E07E /* speex_buffer.h */,
-				2AB182C71FEB50EA0041E07E /* speex_jitter.h */,
-				2AB182C81FEB50EA0041E07E /* Makefile.in */,
-				2AB182C91FEB50EA0041E07E /* speexdsp_config_types.h.in */,
+				2AB1830E1FEB5C830041E07E /* speex_echo.h */,
+				2AB1830F1FEB5C830041E07E /* speexdsp_types.h */,
+				2AB183101FEB5C830041E07E /* speex_resampler.h */,
+				2AB183111FEB5C830041E07E /* speex_preprocess.h */,
+				2AB183121FEB5C830041E07E /* Makefile.am */,
+				2AB183131FEB5C830041E07E /* speex_buffer.h */,
+				2AB183141FEB5C830041E07E /* speex_jitter.h */,
+				2AB183151FEB5C830041E07E /* Makefile.in */,
+				2AB183161FEB5C830041E07E /* speexdsp_config_types.h.in */,
 			);
 			path = speex;
 			sourceTree = "<group>";
 		};
-		2AB182CC1FEB50EA0041E07E /* libspeexdsp */ = {
+		2AB183191FEB5C830041E07E /* libspeexdsp */ = {
 			isa = PBXGroup;
 			children = (
-				2AB182CD1FEB50EA0041E07E /* misc_bfin.h */,
-				2AB182CE1FEB50EA0041E07E /* smallft.h */,
-				2AB182CF1FEB50EA0041E07E /* os_support.h */,
-				2AB182D01FEB50EA0041E07E /* filterbank.h */,
-				2AB182D11FEB50EA0041E07E /* kiss_fft.c */,
-				2AB182D21FEB50EA0041E07E /* stack_alloc.h */,
-				2AB182D31FEB50EA0041E07E /* fixed_arm4.h */,
-				2AB182D41FEB50EA0041E07E /* buffer.c */,
-				2AB182D51FEB50EA0041E07E /* fixed_generic.h */,
-				2AB182D61FEB50EA0041E07E /* fixed_arm5e.h */,
-				2AB182D71FEB50EA0041E07E /* fftwrap.c */,
-				2AB182D81FEB50EA0041E07E /* pseudofloat.h */,
-				2AB182D91FEB50EA0041E07E /* kiss_fftr.c */,
-				2AB182DA1FEB50EA0041E07E /* _kiss_fft_guts.h */,
-				2AB182DB1FEB50EA0041E07E /* jitter.c */,
-				2AB182DC1FEB50EA0041E07E /* math_approx.h */,
-				2AB182DD1FEB50EA0041E07E /* Makefile.am */,
-				2AB182DE1FEB50EA0041E07E /* filterbank.c */,
-				2AB182E01FEB50EA0041E07E /* kiss_fft.h */,
-				2AB182E11FEB50EA0041E07E /* resample.c */,
-				2AB182E21FEB50EA0041E07E /* smallft.c */,
-				2AB182E31FEB50EA0041E07E /* preprocess.c */,
-				2AB182E41FEB50EA0041E07E /* resample_neon.h */,
-				2AB182E61FEB50EA0041E07E /* mdf.c */,
-				2AB182E71FEB50EA0041E07E /* vorbis_psy.h */,
-				2AB182E81FEB50EA0041E07E /* echo_diagnostic.m */,
-				2AB182E91FEB50EA0041E07E /* kiss_fftr.h */,
-				2AB182EA1FEB50EA0041E07E /* bfin.h */,
-				2AB182EB1FEB50EA0041E07E /* fftwrap.h */,
-				2AB182ED1FEB50EA0041E07E /* fixed_bfin.h */,
-				2AB182EE1FEB50EA0041E07E /* Makefile.in */,
-				2AB182EF1FEB50EA0041E07E /* fixed_debug.h */,
-				2AB182F11FEB50EA0041E07E /* scal.c */,
-				2AB182F21FEB50EA0041E07E /* resample_sse.h */,
-				2AB182F31FEB50EA0041E07E /* arch.h */,
+				2AB1831A1FEB5C830041E07E /* misc_bfin.h */,
+				2AB1831B1FEB5C830041E07E /* smallft.h */,
+				2AB1831C1FEB5C830041E07E /* os_support.h */,
+				2AB1831D1FEB5C830041E07E /* filterbank.h */,
+				2AB1831E1FEB5C830041E07E /* kiss_fft.c */,
+				2AB1831F1FEB5C830041E07E /* stack_alloc.h */,
+				2AB183201FEB5C830041E07E /* fixed_arm4.h */,
+				2AB183211FEB5C830041E07E /* buffer.c */,
+				2AB183221FEB5C830041E07E /* fixed_generic.h */,
+				2AB183231FEB5C830041E07E /* fixed_arm5e.h */,
+				2AB183241FEB5C830041E07E /* fftwrap.c */,
+				2AB183251FEB5C830041E07E /* pseudofloat.h */,
+				2AB183261FEB5C830041E07E /* kiss_fftr.c */,
+				2AB183271FEB5C830041E07E /* _kiss_fft_guts.h */,
+				2AB183281FEB5C830041E07E /* jitter.c */,
+				2AB183291FEB5C830041E07E /* math_approx.h */,
+				2AB1832A1FEB5C830041E07E /* Makefile.am */,
+				2AB1832B1FEB5C830041E07E /* filterbank.c */,
+				2AB1832C1FEB5C830041E07E /* kiss_fft.h */,
+				2AB1832D1FEB5C830041E07E /* resample.c */,
+				2AB1832E1FEB5C830041E07E /* smallft.c */,
+				2AB1832F1FEB5C830041E07E /* preprocess.c */,
+				2AB183301FEB5C830041E07E /* resample_neon.h */,
+				2AB183311FEB5C830041E07E /* mdf.c */,
+				2AB183321FEB5C830041E07E /* vorbis_psy.h */,
+				2AB183331FEB5C830041E07E /* echo_diagnostic.m */,
+				2AB183341FEB5C830041E07E /* kiss_fftr.h */,
+				2AB183351FEB5C830041E07E /* bfin.h */,
+				2AB183361FEB5C830041E07E /* fftwrap.h */,
+				2AB183371FEB5C830041E07E /* fixed_bfin.h */,
+				2AB183381FEB5C830041E07E /* Makefile.in */,
+				2AB183391FEB5C830041E07E /* fixed_debug.h */,
+				2AB1833A1FEB5C830041E07E /* scal.c */,
+				2AB1833B1FEB5C830041E07E /* resample_sse.h */,
+				2AB1833C1FEB5C830041E07E /* arch.h */,
 			);
 			path = libspeexdsp;
 			sourceTree = "<group>";
@@ -571,21 +570,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AB182F81FEB50EA0041E07E /* Makefile.in in Resources */,
-				2AB182F51FEB50EA0041E07E /* Makefile.in in Resources */,
+				2AB183411FEB5C830041E07E /* Makefile.in in Resources */,
+				2AB1833E1FEB5C830041E07E /* Makefile.in in Resources */,
 				2A01AB741FEA73C20072034B /* speex.m4 in Resources */,
-				2AB182F41FEB50EA0041E07E /* Makefile.am in Resources */,
-				2AB182FE1FEB50EA0041E07E /* Makefile.am in Resources */,
+				2AB1833D1FEB5C830041E07E /* Makefile.am in Resources */,
+				2AB183471FEB5C830041E07E /* Makefile.am in Resources */,
 				2AD11E041FE360950009C455 /* originalpcm in Resources */,
 				2A9DC28D1FD97AD20020A1F0 /* LaunchScreen.storyboard in Resources */,
 				2A01AB711FEA73C20072034B /* speex.pc in Resources */,
 				2AD11E071FE367A60009C455 /* encodedpcm in Resources */,
 				2A65FF511FE917D9007B7719 /* original2.pcm in Resources */,
-				2AB183081FEB50EA0041E07E /* Makefile.in in Resources */,
+				2AB1834E1FEB5C830041E07E /* Makefile.in in Resources */,
 				2AF426A01FDE1C77009B8C9D /* CAFSample.caf in Resources */,
 				2A01AB731FEA73C20072034B /* libspeex.la in Resources */,
-				2AB182F61FEB50EA0041E07E /* speexdsp_config_types.h.in in Resources */,
-				2AB182F71FEB50EA0041E07E /* Makefile.am in Resources */,
+				2AB1833F1FEB5C830041E07E /* speexdsp_config_types.h.in in Resources */,
+				2AB183401FEB5C830041E07E /* Makefile.am in Resources */,
 				2AC7F3911FE7571A00AE4C03 /* test.pcm in Resources */,
 				2AD11E081FE367A60009C455 /* decodedpcm in Resources */,
 				2A01AB751FEA73C20072034B /* manual.pdf in Resources */,
@@ -618,27 +617,27 @@
 				2A9DC2851FD97AD20020A1F0 /* ViewController.m in Sources */,
 				2AC7F3941FE75B5900AE4C03 /* AudioUnitPlayAndRecord.m in Sources */,
 				2A48E7EB1FDA96C400FA5E5D /* AudioQueuePlayer.m in Sources */,
-				2AB182FF1FEB50EA0041E07E /* filterbank.c in Sources */,
-				2AB183011FEB50EA0041E07E /* resample.c in Sources */,
+				2AB183481FEB5C830041E07E /* filterbank.c in Sources */,
 				2A01AA191FEA62D50072034B /* PlayAndRecordManager.m in Sources */,
+				2AB1834D1FEB5C830041E07E /* echo_diagnostic.m in Sources */,
 				2AE505401FDA709300C626A1 /* AudioQueueRecorder.m in Sources */,
 				2AC7F38D1FE7479A00AE4C03 /* AudioUnitPlayer.m in Sources */,
-				2AB183031FEB50EA0041E07E /* preprocess.c in Sources */,
-				2AB182FB1FEB50EA0041E07E /* fftwrap.c in Sources */,
-				2AB183021FEB50EA0041E07E /* smallft.c in Sources */,
-				2AB182FC1FEB50EA0041E07E /* kiss_fftr.c in Sources */,
-				2AB182F91FEB50EA0041E07E /* kiss_fft.c in Sources */,
-				2AB182FA1FEB50EA0041E07E /* buffer.c in Sources */,
-				2AB182FD1FEB50EA0041E07E /* jitter.c in Sources */,
+				2AB183491FEB5C830041E07E /* resample.c in Sources */,
+				2AB183441FEB5C830041E07E /* fftwrap.c in Sources */,
+				2AB1834A1FEB5C830041E07E /* smallft.c in Sources */,
+				2AB183451FEB5C830041E07E /* kiss_fftr.c in Sources */,
+				2AB1834C1FEB5C830041E07E /* mdf.c in Sources */,
+				2AB183421FEB5C830041E07E /* kiss_fft.c in Sources */,
+				2AB183431FEB5C830041E07E /* buffer.c in Sources */,
+				2AB183461FEB5C830041E07E /* jitter.c in Sources */,
 				2A9DC2901FD97AD20020A1F0 /* main.m in Sources */,
 				2AC7F39E1FE7AEFD00AE4C03 /* SpeexTools.m in Sources */,
+				2AB1834F1FEB5C830041E07E /* scal.c in Sources */,
 				2AC18BA91FDFC1A400D33F19 /* AudioUnitRecorder.m in Sources */,
+				2AB1834B1FEB5C830041E07E /* preprocess.c in Sources */,
 				2A9DC2821FD97AD10020A1F0 /* AppDelegate.m in Sources */,
-				2AB1830A1FEB50EA0041E07E /* scal.c in Sources */,
-				2AB183051FEB50EA0041E07E /* mdf.c in Sources */,
 				2A0835BB1FE11EC6000FD145 /* SpeexEnc.c in Sources */,
 				2AC7F3971FE78EB100AE4C03 /* AudioUnitRecorder2.m in Sources */,
-				2AB183061FEB50EA0041E07E /* echo_diagnostic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

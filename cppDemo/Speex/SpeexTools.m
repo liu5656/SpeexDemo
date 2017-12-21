@@ -106,7 +106,7 @@ static SpeexPreprocessState *configureSpeexDenoise(int frame_size, int sample_ra
     int packets = (int)floor((total * 0.5) / enc_frame_size);
     short *tempBytes = (short *)encodingData.bytes;
     [encodingData replaceBytesInRange:NSMakeRange(0, packets * enc_frame_size * 2) withBytes:NULL length:0];
-    
+
     char *enc_buf = (char *)malloc(MAX_NB_BYTES); // 指向编码完成的数据
     memset(enc_buf, 0, MAX_NB_BYTES);
     
