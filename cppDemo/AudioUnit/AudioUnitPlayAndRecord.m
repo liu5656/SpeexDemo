@@ -109,7 +109,7 @@
     callbackStruct.inputProcRefCon  = (__bridge void *)(self);
     status = AudioUnitSetProperty(audioUnit,
                                   kAudioOutputUnitProperty_SetInputCallback,
-                                  kAudioUnitScope_Global,
+                                  kAudioUnitScope_Output,
                                   INPUT_BUS,
                                   &callbackStruct,
                                   sizeof(callbackStruct));
@@ -119,7 +119,7 @@
     callbackStruct.inputProcRefCon  = (__bridge void *)(self);
     status = AudioUnitSetProperty(audioUnit,
                                   kAudioUnitProperty_SetRenderCallback,
-                                  kAudioUnitScope_Global,
+                                  kAudioUnitScope_Input,
                                   OUTPUT_BUS,
                                   &callbackStruct,
                                   sizeof(callbackStruct));

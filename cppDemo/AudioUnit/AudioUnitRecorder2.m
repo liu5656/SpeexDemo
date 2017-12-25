@@ -101,7 +101,7 @@
     callbackStruct.inputProcRefCon  = (__bridge void *)(self);
     OSStatus status = AudioUnitSetProperty(audioUnit,
                                   kAudioOutputUnitProperty_SetInputCallback,
-                                  kAudioUnitScope_Global,
+                                  kAudioUnitScope_Output,
                                   INPUT_BUS,
                                   &callbackStruct,
                                   sizeof(callbackStruct));
