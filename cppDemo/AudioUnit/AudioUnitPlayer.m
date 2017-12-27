@@ -28,9 +28,15 @@
     NSInputStream *inputStream;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [self initPlayer];
+    }
+    return self;
+}
+
 - (void)play {
     [self startOtherThread];
-    [self initPlayer];
     AudioOutputUnitStart(audioUnit);
 }
 
@@ -134,15 +140,11 @@ OSStatus PlayCalback(void *inRefCon,
                      AudioBufferList * __nullable    ioData) {
     AudioUnitPlayer *player = (__bridge AudioUnitPlayer *)inRefCon;
     memset(ioData->mBuffers[0].mData, 0, ioData->mBuffers[0].mDataByteSize);
+    
+    // 1.pcm 文件流播放(不解压)
 //    ioData->mBuffers[0].mDataByteSize = (UInt32)[player->inputStream read:ioData->mBuffers[0].mData maxLength:ioData->mBuffers[0].mDataByteSize];
     
-//    UInt32 length = ioData->mBuffers[0].mDataByteSize;
-//    if ((num + length) < player->audioData.length) {
-//        NSData *temp = [player->audioData subdataWithRange:NSMakeRange(num, length)];
-//        ioData->mBuffers[0].mData = temp.bytes;
-//        num += length;
-//    }
-
+    // 2.pcm流播放(使用speex解压)
     UInt32 length = ioData->mBuffers[0].mDataByteSize;
     if (length <= player->decodedData.length) {
         NSData *temp = [player->decodedData subdataWithRange:NSMakeRange(0, length)];
@@ -177,8 +179,8 @@ OSStatus PlayCalback(void *inRefCon,
 }
 
 - (void)startOtherThread {
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"encodedpcm" withExtension:nil];
-    encodedData = [NSMutableData dataWithContentsOfURL:url];
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/encodedpcm3"];
+    encodedData = [NSMutableData dataWithContentsOfFile:path];
     decodedData = [NSMutableData data];
     NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(startUncompressData) object:nil];
     [operation start];

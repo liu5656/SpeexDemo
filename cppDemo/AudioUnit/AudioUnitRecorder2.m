@@ -9,7 +9,7 @@
 #import "AudioUnitRecorder2.h"
 #import <AudioUnit/AudioUnit.h>
 #import <AVFoundation/AVFoundation.h>
-
+#import "SpeexTools.h"
 
 #define INPUT_BUS 1
 
@@ -120,7 +120,8 @@ static OSStatus recordingCallback(void *inRefCon,
     bufferList.mBuffers[0].mData = NULL;
     bufferList.mBuffers[0].mDataByteSize = 0;
     AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, &bufferList);
-
+    NSData *encoded = [[SpeexTools shared] compressData:bufferList.mBuffers[0].mData andLengthOfShort:bufferList.mBuffers[0].mDataByteSize];
+    [recorder->_audioData appendData:encoded];
     [recorder handleRecordData:[NSData dataWithBytes:bufferList.mBuffers[0].mData length:bufferList.mBuffers[0].mDataByteSize]];
     return noErr;
 }
@@ -139,6 +140,9 @@ static OSStatus recordingCallback(void *inRefCon,
 }
 
 - (void)startRecord {
+    _audioData = nil;
+    [self audioData];
+    
         OSStatus status = AudioOutputUnitStart(audioUnit);
         NSLog(@"");
 }
@@ -147,9 +151,9 @@ static OSStatus recordingCallback(void *inRefCon,
         AudioOutputUnitStop(audioUnit);
 //        AudioComponentInstanceDispose(audioUnit);
 //        audioUnit = NULL;
-//        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/2212.pcm"];
-//        BOOL result = [self.audioData writeToFile:path atomically:YES];
-//        NSLog(@"save result:%d", result);
+        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/encodedpcm3"];
+        BOOL result = [self.audioData writeToFile:path atomically:YES];
+        NSLog(@"save result:%d", result);
 }
 
 - (void)handleRecordData:(NSData *)data {

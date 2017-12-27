@@ -15,6 +15,7 @@
 		2A01AB751FEA73C20072034B /* manual.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2A01AB411FEA73C10072034B /* manual.pdf */; };
 		2A0835BB1FE11EC6000FD145 /* SpeexEnc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */; };
 		2A48E7EB1FDA96C400FA5E5D /* AudioQueuePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A48E7EA1FDA96C400FA5E5D /* AudioQueuePlayer.m */; };
+		2A4FF2331FF3890F0033D58B /* encodedpcm2 in Resources */ = {isa = PBXBuildFile; fileRef = 2A4FF2321FF3890F0033D58B /* encodedpcm2 */; };
 		2A65FF511FE917D9007B7719 /* original2.pcm in Resources */ = {isa = PBXBuildFile; fileRef = 2A65FF501FE917D9007B7719 /* original2.pcm */; };
 		2A9DC2821FD97AD10020A1F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2811FD97AD10020A1F0 /* AppDelegate.m */; };
 		2A9DC2851FD97AD20020A1F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9DC2841FD97AD20020A1F0 /* ViewController.m */; };
@@ -92,6 +93,7 @@
 		2A0835BA1FE11EC6000FD145 /* SpeexEnc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SpeexEnc.c; sourceTree = "<group>"; };
 		2A48E7E91FDA96C400FA5E5D /* AudioQueuePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioQueuePlayer.h; sourceTree = "<group>"; };
 		2A48E7EA1FDA96C400FA5E5D /* AudioQueuePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioQueuePlayer.m; sourceTree = "<group>"; };
+		2A4FF2321FF3890F0033D58B /* encodedpcm2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = encodedpcm2; sourceTree = "<group>"; };
 		2A65FF501FE917D9007B7719 /* original2.pcm */ = {isa = PBXFileReference; lastKnownFileType = file; path = original2.pcm; sourceTree = "<group>"; };
 		2A9DC27D1FD97AD10020A1F0 /* cppDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cppDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A9DC2801FD97AD10020A1F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				2AD11E031FE360950009C455 /* originalpcm */,
 				2AD11E061FE367A60009C455 /* decodedpcm */,
 				2AD11E051FE367A50009C455 /* encodedpcm */,
+				2A4FF2321FF3890F0033D58B /* encodedpcm2 */,
 				2A9DC2891FD97AD20020A1F0 /* Assets.xcassets */,
 				2A9DC28B1FD97AD20020A1F0 /* LaunchScreen.storyboard */,
 				2A9DC28E1FD97AD20020A1F0 /* Info.plist */,
@@ -584,6 +587,7 @@
 				2AF426A01FDE1C77009B8C9D /* CAFSample.caf in Resources */,
 				2A01AB731FEA73C20072034B /* libspeex.la in Resources */,
 				2AB1833F1FEB5C830041E07E /* speexdsp_config_types.h.in in Resources */,
+				2A4FF2331FF3890F0033D58B /* encodedpcm2 in Resources */,
 				2AB183401FEB5C830041E07E /* Makefile.am in Resources */,
 				2AC7F3911FE7571A00AE4C03 /* test.pcm in Resources */,
 				2AD11E081FE367A60009C455 /* decodedpcm in Resources */,

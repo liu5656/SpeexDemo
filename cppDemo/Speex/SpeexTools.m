@@ -85,19 +85,37 @@ static SpeexPreprocessState *configureSpeexDenoise(int frame_size, int sample_ra
 
 #pragma mark speex decode
 - (NSData *)uncompressData:(const void *)data andLength:(UInt32)dataSize {
+
+//    int packets = ceil(dataSize * 1.0 / Packet_Byte_Compressed);
+//    char enc_buf[Packet_Byte_Compressed * 2] = {0};
+//    memcpy(enc_buf, data, dataSize);
+//    char *temp = enc_buf;
+//
+//    short dec_frames[320] = {0};
+////    memset(dec_frames, 0, sizeof(short) * dec_frame_size * packets);
+//    short *temp_dec = dec_frames;
+//
+//    NSMutableData *decodedData = [NSMutableData data];
+//    speex_bits_reset(&dec_bits);
+//    for (int i = 0; i < packets; i++) {
+//        speex_bits_read_from(&dec_bits, temp, Packet_Byte_Compressed);
+//        speex_decode_int(dec_state, &dec_bits, temp_dec);
+//        [decodedData appendBytes:temp_dec length:dec_bits.nbBits];
+//    }
+    
     [decodingData appendBytes:data length:dataSize];
     NSInteger total = decodingData.length;
     char *temp = (char *)decodingData.bytes;
-    
+
     short *dec_frames = (short *)malloc(sizeof(short) * dec_frame_size);
     memset(dec_frames, 0, sizeof(short) * dec_frame_size);
-    
+
     int packets = floor(total / Packet_Byte_Compressed);
     char enc_buf[Packet_Byte_Compressed];
-    
+
     // save the left data
     [decodingData replaceBytesInRange:NSMakeRange(0, packets * Packet_Byte_Compressed) withBytes:NULL length:0];
-    
+
     NSMutableData *decodedData = [NSMutableData data];
     for (int i = 0; i < packets; i++) {
         memset(enc_buf, 0, Packet_Byte_Compressed);
@@ -121,31 +139,79 @@ static SpeexPreprocessState *configureSpeexDenoise(int frame_size, int sample_ra
 
 #pragma mark speex encoding
 - (NSData *)compressData:(const void *)data andLengthOfShort:(UInt32)dataSize {
+//    int packets = (int)ceil((dataSize * 0.5) / enc_frame_size);
+//
+//    int total = packets * enc_frame_size * 2;
+//    char *pcm_buf = (char *)malloc(total);
+//    memset(pcm_buf, 0, total);
+//    memcpy(pcm_buf, data, dataSize);
+//    short *temp = (short *)pcm_buf;
+//
+//    char enc_buf[MAX_NB_BYTES] = {0}; // 指向编码完成的数据
+//    memset(enc_buf, 0, MAX_NB_BYTES);
+//    speex_bits_reset(&enc_bits);
+//
+//    int nbBytes = 0;
+//    NSMutableData *encodedData = [NSMutableData data];
+//    for (int i = 0; i < packets; i++) {
+//        speex_encode_int(enc_state, temp, &enc_bits);
+//        nbBytes = speex_bits_write(&enc_bits, enc_buf, MAX_NB_BYTES);
+//    }
+//    [encodedData appendBytes:enc_buf length:nbBytes];
+//    free(pcm_buf);
+    
+    
     [encodingData appendBytes:data length:dataSize];
     NSInteger total = encodingData.length;
     int packets = (int)floor((total * 0.5) / enc_frame_size);
-    short *tempBytes = (short *)encodingData.bytes;
+
+    Byte temp[1280] = {0};
+    memcpy(temp, encodingData.bytes, packets * enc_frame_size * 2);
+    short *tempBytes = (short *)temp;
+
     [encodingData replaceBytesInRange:NSMakeRange(0, packets * enc_frame_size * 2) withBytes:NULL length:0];
 
-    char *enc_buf = (char *)malloc(MAX_NB_BYTES); // 指向编码完成的数据
+    char enc_buf[MAX_NB_BYTES] = {0};
     memset(enc_buf, 0, MAX_NB_BYTES);
-    
     NSMutableData *encodedData = [NSMutableData data];
-    for (int i = 0; i < packets; ) {
-        
-        speex_preprocess_run(pState, tempBytes);
-        
+
+    
+    enc_bits.buf_size = packets * enc_frame_size * 2;
+    int nbBytes = 0;
+    for (int i = 0; i < packets; i++) {
         speex_bits_reset(&enc_bits);
         speex_encode_int(enc_state, tempBytes, &enc_bits);
-        int nbBytes = speex_bits_write(&enc_bits, enc_buf, MAX_NB_BYTES);
-        [encodedData appendBytes:enc_buf length:nbBytes];
-        memset(enc_buf, 0, MAX_NB_BYTES);
-        i++;
-        if (i < packets) {
-            tempBytes += enc_frame_size;
-        }
+        nbBytes = speex_bits_write(&enc_bits, enc_buf, MAX_NB_BYTES);
+        [encodedData appendBytes:enc_buf length:(nbBytes)];
     }
-    free(enc_buf);
+    
+    
+    
+//    [encodingData appendBytes:data length:dataSize];
+//    NSInteger total = encodingData.length;
+//    int packets = (int)floor((total * 0.5) / enc_frame_size);
+//    short *tempBytes = (short *)encodingData.bytes;
+//    [encodingData replaceBytesInRange:NSMakeRange(0, packets * enc_frame_size * 2) withBytes:NULL length:0];
+//
+//    char *enc_buf = (char *)malloc(MAX_NB_BYTES);
+//    memset(enc_buf, 0, MAX_NB_BYTES);
+//
+//    NSMutableData *encodedData = [NSMutableData data];
+//    for (int i = 0; i < packets; ) {
+//
+//        speex_preprocess_run(pState, tempBytes);
+//
+//        speex_bits_reset(&enc_bits);
+//        speex_encode_int(enc_state, tempBytes, &enc_bits);
+//        int nbBytes = speex_bits_write(&enc_bits, enc_buf, MAX_NB_BYTES);
+//        [encodedData appendBytes:enc_buf length:nbBytes];
+//        memset(enc_buf, 0, MAX_NB_BYTES);
+//        i++;
+//        if (i < packets) {
+//            tempBytes += enc_frame_size;
+//        }
+//    }
+//    free(enc_buf);
     return encodedData;
 }
 

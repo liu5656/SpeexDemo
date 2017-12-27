@@ -13,6 +13,7 @@
 #import "AudioUnitPlayAndRecord.h"
 #import <AudioUnit/AudioUnit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "SpeexTools.h"
 
 #define INPUT_BUS 1
 #define OUTPUT_BUS 0
@@ -22,14 +23,23 @@
     AudioUnit           audioUnit;
     AudioBufferList     bufferList;
     NSInputStream       *inputStream;
+    NSMutableData       *pcmData;
+    NSMutableArray      *pcmArray;
+    
+    NSMutableData       *encodedData;
 }
+
 
 - (instancetype)init {
     if (self = [super init]) {
+        pcmArray = [NSMutableArray array];
+        pcmData = [NSMutableData data];
+        encodedData = [NSMutableData data];
         [self initialRecord];
     }
     return self;
 }
+
 
 - (void)playAndRecord {
     AudioOutputUnitStart(audioUnit);
@@ -37,6 +47,10 @@
 
 - (void)stop {
     AudioOutputUnitStop(audioUnit);
+    
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/encodedpcm2"];
+    BOOL result = [encodedData writeToFile:path atomically:YES];
+    NSLog(@"save file result is %d", result);
 }
 
 - (void)initialRecord {
@@ -52,8 +66,8 @@
     NSError *error =nil;
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:&error];
-    [[AVAudioSession sharedInstance] setPreferredIOBufferDuration:0.05 error:&error];
-//    [session setActive:YES error:&error];
+    [[AVAudioSession sharedInstance] setPreferredIOBufferDuration:0.02 error:&error];
+    [session setActive:YES error:&error];
     
     AudioComponentDescription           desc;
     desc.componentType                  = kAudioUnitType_Output;
@@ -144,6 +158,11 @@ static OSStatus recordingCallback(void *inRefCon,
     recorder->bufferList.mBuffers[0].mData = NULL;
     recorder->bufferList.mBuffers[0].mDataByteSize = 0;
     AudioUnitRender(recorder->audioUnit, ioActionFlags, inTimeStamp, inBusNumber, inNumberFrames, &recorder->bufferList);
+    NSLog(@"-------%@", [NSData dataWithBytes:recorder->bufferList.mBuffers[0].mData length:recorder->bufferList.mBuffers[0].mDataByteSize]);
+    NSData *encoded = [[SpeexTools shared] compressData:recorder->bufferList.mBuffers[0].mData andLengthOfShort:recorder->bufferList.mBuffers[0].mDataByteSize];
+    [recorder->pcmArray addObject:encoded];
+    [recorder->encodedData appendData:encoded];
+    
     return noErr;
 }
 
@@ -154,10 +173,31 @@ static OSStatus playbackCallback(void *inRefCon,
                                  UInt32 inNumberFrames,
                                  AudioBufferList *ioData) {
     AudioUnitPlayAndRecord *recorder = (__bridge AudioUnitPlayAndRecord*)inRefCon;
-    ioData->mBuffers[0].mData = recorder->bufferList.mBuffers[0].mData;
-    ioData->mBuffers[0].mDataByteSize = recorder->bufferList.mBuffers[0].mDataByteSize;
-    ioData->mBuffers[0].mNumberChannels = recorder->bufferList.mBuffers[0].mNumberChannels;
-    ioData->mNumberBuffers = 1;
+//    ioData->mBuffers[0].mData = recorder->bufferList.mBuffers[0].mData;
+//    ioData->mBuffers[0].mDataByteSize = recorder->bufferList.mBuffers[0].mDataByteSize;
+//    ioData->mBuffers[0].mNumberChannels = recorder->bufferList.mBuffers[0].mNumberChannels;
+//    ioData->mNumberBuffers = 1;
+
+    
+    if (recorder->pcmArray.count) {
+        NSData *temp = recorder->pcmArray.firstObject;
+        [recorder->pcmData appendData:[[SpeexTools shared] uncompressData:temp.bytes andLength:(UInt32)temp.length]];
+        [recorder->pcmArray removeObjectAtIndex:0];
+    }
+    
+    
+    if (recorder->pcmData.length >= ioData->mBuffers[0].mDataByteSize) {
+        NSData *temp = [recorder->pcmData subdataWithRange:NSMakeRange(0, ioData->mBuffers[0].mDataByteSize)];
+        ioData->mBuffers[0].mData = (void *)temp.bytes;
+        ioData->mBuffers[0].mDataByteSize = ioData->mBuffers[0].mDataByteSize;
+        ioData->mBuffers[0].mNumberChannels = ioData->mBuffers[0].mNumberChannels;
+        ioData->mNumberBuffers = 1;
+        [recorder->pcmData replaceBytesInRange:NSMakeRange(0, temp.length) withBytes:nil length:0];
+    }else{
+        memset(ioData->mBuffers[0].mData, 0, ioData->mBuffers[0].mDataByteSize);
+        ioData->mBuffers[0].mDataByteSize = 0;
+    }
+    
     return noErr;
 }
 
@@ -168,6 +208,8 @@ void checkStatus2(OSStatus status, char error[]) {
         exit(-1);
     }
 }
+
+
 
 
 @end
